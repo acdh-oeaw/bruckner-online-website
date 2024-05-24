@@ -1,0 +1,92 @@
+{
+	"ContactPage": {
+		"form": {
+			"email": "Email",
+			"invalid-input": "Ungültige Eingabe.",
+			"message": "Nachricht",
+			"name": "Name",
+			"subject": "Betreff",
+			"success": "Nachricht erfolgreich gesendet.",
+			"submit": "Absenden",
+			"unknown-error": "Konnte Nachricht nicht senden."
+		}
+	},
+	"ImageCarousel": {
+		"next": "Nächste",
+		"previous": "Vorherige",
+		"slide": "{current} von {total}",
+		"start": "Starten",
+		"stop": "Pausieren"
+	},
+	"ImprintPage": {
+		"meta": {
+			"title": "Impressum"
+		},
+		"title": "Impressum"
+	},
+	"IndexPage": {
+		"carousel": {
+			"title": "Empfohlene Links"
+		},
+		"meta": {
+			"title": "Startseite"
+		}
+	},
+	"LexiconNav": {
+		"nav": "Lexicon",
+		"links": {
+			"abbreviations": "Abkürzungen",
+			"articles": "Artikel",
+			"authors": "Autor*innen",
+			"bibliography": "Literatur",
+			"home": "Startseite",
+			"oeml": "OEML",
+			"persons": "Personen",
+			"places": "Orte",
+			"project": "Projekt",
+			"search": "Suche",
+			"terms": "Sachbegriffe",
+			"works": "Werke"
+		}
+	},
+	"LexiconSearchForm": {
+		"search": "Suche",
+		"field": "Suchfelder",
+		"all-fields": "in allen Feldern",
+		"headings": "Artikelüberschrift"
+	},
+	"Mdx": {
+		"FootnoteBackLabel": "Zurück zu Referenz {reference}",
+		"Footnotes": "Fußnoten"
+	},
+	"MobileNavToggle": {
+		"label": "Navigationsmenü öffnen"
+	},
+	"NotFoundPage": {
+		"meta": {
+			"title": "Seite nicht gefunden"
+		},
+		"title": "Seite nicht gefunden"
+	},
+	"SearchResults": {
+		"search-results": "{count} Suchergebnisse",
+		"nothing-found": "Nichts gefunden",
+		"error": "Konnte Suche nicht ausführen",
+		"empty-query": "Bitte einen Suchbegriff eingeben"
+	},
+	"SkipLink": {
+		"skip-to-main-content": "Zum Hauptinhalt springen"
+	},
+	"WebsiteFooter": {
+		"links": {
+			"contact": "Kontakt",
+			"imprint": "Impressum"
+		}
+	},
+	"WebsiteHeader": {
+		"links": {
+			"home": "Startseite"
+		},
+		"navigation-primary": "Primär"
+	}
+}

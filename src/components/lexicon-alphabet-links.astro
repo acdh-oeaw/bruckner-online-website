@@ -1,0 +1,34 @@
+---
+import { createUrlSearchParams, range } from "@acdh-oeaw/lib";
+
+interface Props {
+	current: string;
+}
+
+const { current } = Astro.props;
+
+const alpha = range(0, 25).map((i) => i + 97);
+const alphabet = alpha.map((x) => String.fromCharCode(x));
+---
+
+<div class="flex gap-1">
+	{
+		alphabet.map((letter) => {
+			const isCurrent = letter === current;
+
+			return (
+				<a
+					aria-current={isCurrent ? "page" : undefined}
+					class:list={[
+						"block rounded-md p-1 transition hover:underline",
+						isCurrent ? "underline" : undefined,
+					]}
+					data-astro-reload
+					href={`?${String(createUrlSearchParams({ letter, start: 1 }))}`}
+				>
+					{letter.toUpperCase()}
+				</a>
+			);
+		})
+	}
+</div>

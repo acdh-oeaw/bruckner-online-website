@@ -1,0 +1,100 @@
+---
+import { getFormDataValues } from "@acdh-oeaw/lib";
+import * as v from "valibot";
+
+import SubmitButton from "@/components/form/submit-button.astro";
+import TextAreaField from "@/components/form/text-area-field.astro";
+import TextInputField from "@/components/form/text-input-field.astro";
+import MainContent from "@/components/main-content.astro";
+import PageCard from "@/components/page-card.astro";
+import PageSection from "@/components/page-section.astro";
+import PageTitle from "@/components/page-title.astro";
+import { defaultLocale, type Locale } from "@/config/i18n.config";
+import PageLayout from "@/layouts/page-layout.astro";
+import { processMdx } from "@/lib/content/mdx";
+import { reader } from "@/lib/content/reader";
+import { sendEmail } from "@/lib/email";
+import { createI18n } from "@/lib/i18n";
+
+export const prerender = false;
+
+const locale = (Astro.currentLocale ?? defaultLocale) as Locale;
+const { t } = await createI18n(locale);
+
+const page = await reader().collections.pages.readOrThrow("kontakt");
+
+const documentTitle = page.title;
+const { title } = page;
+const { default: Content } = await processMdx(await page.content(), locale);
+
+let status = { kind: "initial" } as
+	| { kind: "error"; message: string }
+	| { kind: "initial" }
+	| { kind: "success"; message: string };
+
+if (Astro.request.method === "POST") {
+	try {
+		const data = await Astro.request.formData();
+		const formData = getFormDataValues(data);
+		const schema = v.object({
+			name: v.string([v.minLength(1)]),
+			email: v.string([v.email()]),
+			message: v.string([v.minLength(1)]),
+			subject: v.string([v.minLength(1)]),
+		});
+		const result = v.safeParse(schema, formData);
+		if (!result.success) {
+			status = { kind: "error", message: t("ContactPage.form.invalid-input") };
+		} else {
+			const { name, email, message, subject } = result.output;
+			await sendEmail({
+				from: `${name} <${email}>`,
+				subject,
+				text: message,
+				attachments: [],
+			});
+			status = { kind: "success", message: t("ContactPage.form.success") };
+		}
+	} catch (error) {
+		if (error instanceof Error) {
+			console.error(error.message);
+		}
+		status = { kind: "error", message: t("ContactPage.form.unknown-error") };
+	}
+}
+---
+
+<PageLayout locale={locale} title={documentTitle}>
+	<MainContent search="exclude">
+		<PageSection>
+			<PageCard>
+				<PageTitle>{title}</PageTitle>
+
+				<div class="prose">
+					<Content />
+				</div>
+
+				<form class="grid gap-y-6" data-astro-reload method="post">
+					<TextInputField required label={t("ContactPage.form.name")} name="name" />
+					<TextInputField required label={t("ContactPage.form.email")} name="email" type="email" />
+					<TextInputField required label={t("ContactPage.form.subject")} name="subject" />
+					<TextAreaField required label={t("ContactPage.form.message")} name="message" rows={5} />
+
+					<SubmitButton>{t("ContactPage.form.submit")}</SubmitButton>
+
+					<div
+						aria-live="polite"
+						aria-atomic="true"
+						class={status.kind === "error"
+							? "text-negative-600"
+							: status.kind === "success"
+								? "text-positive-600"
+								: undefined}
+					>
+						{status.kind !== "initial" ? status.message : null}
+					</div>
+				</form>
+			</PageCard>
+		</PageSection>
+	</MainContent>
+</PageLayout>

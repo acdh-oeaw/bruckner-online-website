@@ -1,0 +1,19 @@
+---
+title: 'Kitzler-Studienbuch: Musikanalyse'
+image: /assets/content/pages/forschung/kitzler-studienbuch-musikanalyse/image.jpg
+---
+Die **automatisierte harmonische Analyse** findet in zwei Schritten statt. Zur Erkennung der Tonarten wird der sogenannte **Krumhansl-Schmuckler-Algorithmus**, ein im Bereich der *Music Information Retrieval* vielfach eingesetztes mathematisches Verfahren, verwendet. Der Algorithmus basiert auf der **statistischen Auswertung der klingenden Tonhöhen** und liefert durch den Vergleich mit Referenzwerten Wahrscheinlichkeiten zu der korrekten Tonart. Die Referenzwerte sind in sechs verschiedenen auswählbaren Profilen, die bestimmten Tönen eine **unterschiedlich starke Gewichtung** in der Berechnung der Tonart zuweisen, eingeteilt. Vor der Anwendung der Analyse kann außerdem die **Größe des Analysesegments** gewählt werden, wobei das Minimum ein einzelner Takt und das Maximum die Anzahl der Takte des Musikstücks darstellt. Beispielsweise wird bei einer Segmentgröße von vier Takten jeder einzelne Takt in Verbindung mit den drei Folgetakten analysiert. Durch diese Kontextualisierung des musikalischen Inhalts können aufschlussreiche Zusammenhänge offengelegt werden.
+
+Die Ergebnisse der Analyse erscheinen unter den Notensystemen je nach Segmentauswahl als **verschiedenfarbige Balken**, die für jeweils eine Tonart stehen. Der Name der Tonart wird in einem kleinen Tooltip-Fenster angezeigt, sobald sich der Mauscursor über einem der Balken befindet. Bei mehreren verschiedenen Interpretationen einer nicht eindeutigen Stelle können auch eine Vielzahl an Balken ausgegeben werden, was meistens auf Tonartänderungen schließen lässt. Durch dieses Indiz können **Modulationen** schnell entdeckt werden. Auf Grundlage der herrschenden Tonart bestimmt ein auf XML-basiertes Skript die einzelnen Stufen der gleichzeitig klingenden Noten. Einen weiteren Ansatz zur Analyse bietet die **Harmonieerkennung**, die allein auf den MEI-Daten beruht. Neben den Hauptstufen und akkordeigenen Tönen werden akkordfremde Töne wie Vorhalte, Wechselnoten und Durchgangsnoten erkannt. Dies geschieht über Algorithmen, die mit Regeln aus der **musikwissenschaftlichen Satzlehre** arbeiten.
+
+#### Navigation
+
+* [Kitzler-Studienbuch: Digitale Edition und Musikanalyse](http://www.bruckner-online.at/?page_id=1570)
+
+* [Projektbeschreibung](http://www.bruckner-online.at/?page_id=18)
+
+* [Beschreibung der Codierung](http://www.bruckner-online.at/?page_id=1650)
+
+* [Beschreibung des Imageviewers](http://www.bruckner-online.at/?page_id=1580)
+
+* [Imageviewer](https://apps-mufo.oeaw.ac.at/studienbuch/)

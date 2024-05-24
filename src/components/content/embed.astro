@@ -1,0 +1,16 @@
+---
+interface Props {
+	caption?: string;
+	href: string;
+}
+
+const { caption, href } = Astro.props;
+---
+
+<div class="relative min-h-screen-lg">
+	<iframe
+		allowfullscreen
+		class="absolute inset-0 size-full overflow-y-auto overflow-x-hidden rounded-md"
+		src={href}
+		title={caption ?? "Iframe"}></iframe>
+</div>

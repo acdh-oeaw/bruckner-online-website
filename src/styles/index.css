@@ -1,0 +1,6 @@
+:root {
+	--font-body: "Inter Variable";
+	--color-brand-red: hsl(355.9deg 74.5% 38.4%);
+	--color-brand-orange: hsl(25.3deg 91% 48%);
+	--color-brand-blue: hsl(200.6deg 93.9% 32.2%);
+}

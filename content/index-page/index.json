@@ -1,0 +1,87 @@
+{
+  "hero": {
+    "slides": [
+      {
+        "title": "Jubiläumsjahr 2024",
+        "summary": "Veranstaltungen zum 200. Geburtstag Anton Bruckners",
+        "alignment": "right",
+        "image": "/assets/content/index-page/hero/slides/0/image.jpg",
+        "page": "lexikon"
+      },
+      {
+        "title": "Digitales Werkverzeichnis Anton Bruckner",
+        "summary": "Datenbank mit Informationen zu Werken Anton Bruckners und zu weiteren Quellen aus dem musikalischen Nachlass",
+        "alignment": "left",
+        "image": "/assets/content/index-page/hero/slides/1/image.jpg",
+        "page": "werkverzeichnis/wab"
+      },
+      {
+        "title": "Anton Bruckner-Lexikon",
+        "summary": "Mit Informationen zu Leben und Werk des Komponisten",
+        "alignment": "right",
+        "image": "/assets/content/index-page/hero/slides/2/image.jpg",
+        "page": "lexikon"
+      },
+      {
+        "title": "Musik-Handschriften ",
+        "summary": "31.000 Farbdigitalisate in hoher Qualität von über 700 Autographen und frühen Abschriften Bruckners (zugänglich über das Werkverzeichnis)",
+        "alignment": "left",
+        "image": "/assets/content/index-page/hero/slides/3/image.jpg",
+        "page": "werkverzeichnis/wab"
+      },
+      {
+        "title": "Musik-Drucke ",
+        "summary": "5500 Farbdigitalisate aller zur Verfügung stehenden Erstausgaben und der Alten Gesamtausgabe",
+        "alignment": "right",
+        "image": "/assets/content/index-page/hero/slides/4/image.jpg",
+        "page": "drucke/erstdrucke"
+      },
+      {
+        "title": "Biographie",
+        "summary": "Zusammenstellung der wichtigsten Stationen in Bruckners Leben und zeitliche Einordung der Werke",
+        "alignment": "left",
+        "image": "/assets/content/index-page/hero/slides/5/image.jpg",
+        "page": "leben/kindheit-und-jugend"
+      },
+      {
+        "title": "Kitzler-Studienbuch",
+        "summary": "Digitale Edition und automatisierte Harmonieanalyse auf Grundlage MEI-codierter Notation.",
+        "alignment": "left",
+        "image": "/assets/content/index-page/hero/slides/6/image.jpg",
+        "page": "forschung/kitzler-studienbuch"
+      },
+      {
+        "title": "Bibliographie",
+        "summary": "Datenbank mit 9749 Literaturzitaten",
+        "alignment": "left",
+        "image": "/assets/content/index-page/hero/slides/7/image.jpg",
+        "page": "leben/bibliographie"
+      },
+      {
+        "title": "Anton Bruckner Chronologie Datenbank",
+        "summary": "von Franz Scheder",
+        "alignment": "right",
+        "image": "/assets/content/index-page/hero/slides/8/image.jpg",
+        "page": "forschung/chronologie-datenbank"
+      }
+    ]
+  },
+  "quote": "Anton Bruckner-Jubiläumsjahr 2024 an der Akademie der Wissenschaften: Symposion (10.-12.04). Jubiläumskonzert im historischen Festsaal (10.04.). Bruckner-Fest im Arkadenhof der Akademie (07.09.). ",
+  "links": [
+    {
+      "title": "Werkverzeichnis",
+      "summary": "Datenbank mit Informationen zu Werken Anton Bruckners und zu weiteren Quellen aus dem musikalischen Nachlass",
+      "page": "werkverzeichnis/wab"
+    },
+    {
+      "title": "ABLO",
+      "summary": "Anton Bruckner-Lexikon online mit Informationen zu Leben und Werk des Komponisten",
+      "page": "lexikon"
+    },
+    {
+      "title": "ABCD",
+      "summary": "Anton Bruckner Chronologie Datenbank der biographisch erfassten Informationen zu Leben und Werk des Komponisten",
+      "page": "forschung/chronologie-datenbank"
+    }
+  ]
+}

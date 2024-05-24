@@ -1,0 +1,79 @@
+---
+import LexiconSearchForm from "@/components/lexicon-search-form.astro";
+import { defaultLocale, type Locale } from "@/config/i18n.config";
+import LexiconLayout from "@/layouts/lexicon-layout.astro";
+import PageLayout from "@/layouts/page-layout.astro";
+import { processMdx } from "@/lib/content/mdx";
+import { reader } from "@/lib/content/reader";
+
+const locale = (Astro.currentLocale ?? defaultLocale) as Locale;
+
+const page = await reader().collections.pages.readOrThrow("lexikon/index");
+
+const documentTitle = page.title;
+const { title, image } = page;
+const { default: Content } = await processMdx(await page.content(), locale);
+---
+
+<PageLayout locale={locale} title={documentTitle}>
+	<LexiconLayout image={image} title={title}>
+		<div class="prose">
+			<Content />
+		</div>
+
+		<div class="grid gap-y-8">
+			<LexiconSearchForm />
+
+			<div class="grid gap-x-8 gap-y-6 grid-fluid-cols-80">
+				<a
+					class="grid content-start border px-6 py-3 transition hover:bg-neutral-50"
+					data-astro-reload
+					href="/lexikon/werke"
+				>
+					<div class="text-xl font-medium uppercase">Bruckners Werke</div>
+					<span class="text-sm text-brand-red">in Einzeldarstellungen</span>
+				</a>
+				<a
+					class="grid content-start border px-6 py-3 transition hover:bg-neutral-50"
+					data-astro-reload
+					href="/lexikon/personen"
+				>
+					<div class="text-xl font-medium uppercase">Personen</div>
+					<span class="text-sm text-brand-red">rund um Bruckner</span>
+				</a>
+				<a
+					class="grid content-start border px-6 py-3 transition hover:bg-neutral-50"
+					data-astro-reload
+					href="/lexikon/orte"
+				>
+					<div class="text-xl font-medium uppercase">Orte</div>
+					<span class="text-sm text-brand-red">die mit Bruckner in Zusammenhang stehen</span>
+				</a>
+				<a
+					class="grid content-start border px-6 py-3 transition hover:bg-neutral-50"
+					data-astro-reload
+					href="/lexikon/sachbegriffe"
+				>
+					<div class="text-xl font-medium uppercase">Sachbegriffe aller Art</div>
+					<span class="text-sm text-brand-red">von "ABCD" bis "Zyklus"</span>
+				</a>
+				<a
+					class="grid content-start border px-6 py-3 transition hover:bg-neutral-50"
+					data-astro-reload
+					href="/lexikon/artikel"
+				>
+					<div class="text-xl font-medium uppercase">Alle ABLO-Artikel</div>
+					<span class="text-sm text-brand-red">in alphabetischer Auflistung</span>
+				</a>
+				<a
+					class="grid content-start border px-6 py-3 transition hover:bg-neutral-50"
+					href="https://musiklexikon.ac.at/0xc1aa5576_0x0001f96d"
+					target="_blank"
+				>
+					<div class="text-xl font-medium uppercase">Bruckner im OeML</div>
+					<span class="text-sm text-brand-red">Osterreichisches Musiklexikon</span>
+				</a>
+			</div>
+		</div>
+	</LexiconLayout>
+</PageLayout>

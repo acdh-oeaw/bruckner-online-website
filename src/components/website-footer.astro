@@ -1,0 +1,103 @@
+---
+import Link from "@/components/navigation/nav-link.astro";
+import type { Locale } from "@/config/i18n.config";
+import { createI18n } from "@/lib/i18n";
+
+const { t } = await createI18n(Astro.currentLocale as Locale | undefined);
+---
+
+<footer class="bg-[#3a3a3a] text-[#aaa]">
+	<div class="mx-auto grid w-full max-w-screen-lg gap-y-6 px-4 py-12 text-sm">
+		<div class="grid grid-cols-[75px_1fr] items-start gap-x-8 gap-y-6 md:grid-cols-[75px_1fr_1fr]">
+			<div class="grid gap-y-4">
+				<a class="inline-flex py-1 focus-visible:outline-white" href="https://www.oeaw.ac.at/">
+					<img alt="" class="h-16 w-auto" loading="lazy" src="/assets/images/oeaw-logo-dark.png" />
+					<span class="sr-only">Österreichische Akademie der Wissenschaften</span>
+				</a>
+				<a class="inline-flex py-1 focus-visible:outline-white" href="https://www.oeaw.ac.at/acdh/">
+					<img
+						alt=""
+						class="h-16 w-auto"
+						loading="lazy"
+						src="/assets/images/acdh-ch-logo-dark.svg"
+					/>
+					<span class="sr-only">Austrian Centre for Digital Humanities and Cultural Heritage</span>
+				</a>
+			</div>
+			<div class="grid gap-y-2">
+				<div class="font-medium">ACDH-CH</div>
+				<div>
+					Österreichische Akademie der Wissenschaften
+					<br />
+					Austrian Centre for Digital Humanities and Cultural Heritage
+					<br />
+					Abteilung Musikwissenschaft
+				</div>
+				<div>
+					<div>Bäckerstraße 13, 1010 Wien</div>
+				</div>
+				<div>
+					<div>
+						T:
+						<a
+							class="underline decoration-dotted underline-offset-4 hover:no-underline focus-visible:outline-white"
+							href="tel:+43 1 51581-2200"
+						>
+							+43 1 51581-2200
+						</a>
+					</div>
+					<div>
+						E:
+						<a
+							class="underline decoration-dotted underline-offset-4 hover:no-underline focus-visible:outline-white"
+							href="mailto:acdh-ch@oeaw.ac.at"
+						>
+							acdh-ch@oeaw.ac.at
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-span-2 grid gap-y-3 md:col-span-1">
+				<div class="font-medium">
+					Veröffentlicht mit Unterstützung des Austrian Science Fund (FWF)
+				</div>
+				<div>PUB 240-G21 und ORD 77-VO</div>
+				<div class="grid gap-y-1.5">
+					<a class="inline-flex py-1 focus-visible:outline-white" href="http://www.fwf.ac.at/">
+						<img alt="" class="h-6 w-auto" loading="lazy" src="/assets/images/fwf-logo-dark.png" />
+						<span class="sr-only">Austrian Science Fund (FWF)</span>
+					</a>
+					<div>und</div>
+					<a class="inline-flex py-1 focus-visible:outline-white" href="http://www.onb.ac.at/">
+						<img
+							alt=""
+							class="h-16 w-auto"
+							loading="lazy"
+							src="/assets/images/oenb-logo-dark.png"
+						/>
+						<span class="sr-only">Österreichische Nationalbibliothek</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="flex justify-center gap-x-2 bg-[#2a2a2a] py-2 text-center text-sm text-[#aaa]">
+		<span>&copy; Copyright OEAW</span>
+		|
+		<Link
+			class="underline decoration-dotted underline-offset-4 hover:no-underline focus-visible:outline-white"
+			href="/impressum"
+		>
+			{t("WebsiteFooter.links.imprint")}
+		</Link>
+		|
+		<Link
+			class="underline decoration-dotted underline-offset-4 hover:no-underline focus-visible:outline-white"
+			href="/kontakt"
+		>
+			{t("WebsiteFooter.links.contact")}
+		</Link>
+	</div>
+</footer>
