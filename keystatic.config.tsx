@@ -1,7 +1,7 @@
 import { createUrl, pick } from "@acdh-oeaw/lib";
-import { collection, config, fields, singleton } from "@keystatic/core";
+import { collection, config, fields, NotEditable, singleton } from "@keystatic/core";
 import { block, mark, wrapper } from "@keystatic/core/content-components";
-import { DownloadIcon, ImageIcon, PencilIcon, ScanIcon, VideoIcon } from "lucide-react";
+import { DownloadIcon, ImageIcon, PencilIcon, PlayIcon, ScanIcon, VideoIcon } from "lucide-react";
 
 import { Logo } from "@/components/logo";
 import { createAssetPaths, createPreviewUrl } from "@/config/content.config";
@@ -12,6 +12,52 @@ function createComponents(
 	components?: Array<"Download" | "Figure" | "Video">,
 ) {
 	const allComponents = {
+		AudioPlayer: block({
+			label: "AudioPlayer",
+			description: "An audio player with playlist.",
+			icon: <PlayIcon />,
+			schema: {
+				tracks: fields.array(
+					fields.object(
+						{
+							title: fields.text({
+								label: "Title",
+								validation: { isRequired: true },
+							}),
+							file: fields.file({
+								label: "File",
+								...createAssetPaths(assetPath),
+								validation: { isRequired: true },
+							}),
+						},
+						{
+							label: "Track",
+						},
+					),
+					{
+						label: "Tracks",
+						itemLabel(props) {
+							return props.fields.title.value;
+						},
+					},
+				),
+			},
+			ContentView(props) {
+				return (
+					<NotEditable>
+						<ul>
+							{props.value.tracks.map((track, index) => {
+								return (
+									<li key={index}>
+										<div>{track.title}</div>
+									</li>
+								);
+							})}
+						</ul>
+					</NotEditable>
+				);
+			},
+		}),
 		Download: mark({
 			label: "Download",
 			// description: "A link to an uploaded file.",
@@ -99,10 +145,12 @@ function createComponents(
 				);
 
 				return (
-					<figure>
-						<iframe allowFullScreen={true} src={href} title="Video" />
-						{caption ? <figcaption>{caption}</figcaption> : null}
-					</figure>
+					<NotEditable>
+						<figure>
+							<iframe allowFullScreen={true} src={href} title="Video" />
+							{caption ? <figcaption>{caption}</figcaption> : null}
+						</figure>
+					</NotEditable>
 				);
 			},
 		}),

@@ -2,6 +2,7 @@
 
 import type { MDXComponents } from "mdx/types";
 
+import AudioPlayer from "@/components/content/audio-player.astro";
 import Download from "@/components/content/download.astro";
 import Embed from "@/components/content/embed.astro";
 import Figure from "@/components/content/figure.astro";
@@ -11,6 +12,7 @@ import Video from "@/components/content/video.astro";
 
 export function useMDXComponents(): MDXComponents {
 	return {
+		AudioPlayer,
 		Download,
 		Embed,
 		Figure,

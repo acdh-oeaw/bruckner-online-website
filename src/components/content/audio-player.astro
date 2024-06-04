@@ -1,0 +1,146 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	tracks: Array<{ title: string; file: string }>;
+}
+
+const { tracks } = Astro.props;
+---
+
+<audio-player class="not-prose group grid gap-y-2" data-state="pause">
+	<ul class="grid gap-y-1" role="list">
+		{
+			tracks.map((track) => {
+				return (
+					<li class="grid">
+						<audio-track
+							class="select-none rounded-md border px-4 py-1 transition hover:bg-neutral-100 data-[current]:bg-neutral-100"
+							data-title={track.title}
+							data-href={track.file}
+							tabIndex={0}
+						>
+							{track.title}
+						</audio-track>
+					</li>
+				);
+			})
+		}
+	</ul>
+	<div class="flex items-center gap-x-4">
+		<button data-control>
+			<Icon
+				aria-label="play"
+				class="size-8 shrink-0 group-data-[state=play]:hidden"
+				name="lucide:circle-play"
+			/>
+			<Icon
+				aria-label="pause"
+				class="size-8 shrink-0 group-data-[state=pause]:hidden"
+				name="lucide:circle-pause"
+			/>
+		</button>
+		<div data-track-title></div>
+	</div>
+</audio-player>
+
+<script>
+	import { assert } from "@acdh-oeaw/lib";
+
+	class AudioPlayer extends HTMLElement {
+		audio: HTMLAudioElement | null;
+		button: HTMLButtonElement | null;
+		currentTrack: number;
+		track: HTMLDivElement | null;
+		tracks: Array<{ title: string; href: string; element: HTMLElement }>;
+
+		constructor() {
+			super();
+
+			this.audio = null;
+			this.button = null;
+			this.currentTrack = 0;
+			this.track = null;
+			this.tracks = [];
+		}
+
+		connectedCallback() {
+			this.audio = document.createElement("audio");
+
+			this.audio.addEventListener("pause", () => {
+				assert(this.audio);
+				assert(this.track);
+
+				this.dataset.state = "pause";
+				this.track.textContent = "";
+			});
+
+			this.audio.addEventListener("play", () => {
+				assert(this.audio);
+				assert(this.track);
+
+				const track = this.tracks[this.currentTrack];
+				assert(track);
+				this.dataset.state = "play";
+				this.track.textContent = "Sie hören: " + track.title;
+				this.tracks.forEach(({ element }) => {
+					if (element === track.element) {
+						element.dataset.current = "";
+					} else {
+						delete element.dataset.current;
+					}
+				});
+			});
+
+			this.audio.addEventListener("ended", () => {
+				if (this.currentTrack < this.tracks.length - 1) {
+					this.currentTrack++;
+					this.play();
+				}
+			});
+
+			const tracks = this.querySelectorAll<HTMLElement>("audio-track");
+
+			tracks.forEach((element, index) => {
+				element.addEventListener("click", () => {
+					this.currentTrack = index;
+					this.play();
+				});
+			});
+
+			this.tracks = Array.from(tracks).map((element) => {
+				const { href, title } = element.dataset;
+				assert(href);
+				assert(title);
+				return { href, title, element };
+			});
+
+			this.button = this.querySelector<HTMLButtonElement>("button");
+
+			this.button?.addEventListener("click", () => {
+				assert(this.audio);
+				if (this.audio.paused) {
+					this.play();
+				} else {
+					this.pause();
+				}
+			});
+
+			this.track = this.querySelector<HTMLDivElement>("div[data-track-title]");
+		}
+
+		play() {
+			assert(this.audio);
+			const track = this.tracks[this.currentTrack];
+			assert(track);
+			this.audio.src = track.href;
+			this.audio.play();
+		}
+
+		pause() {
+			this.audio?.pause();
+		}
+	}
+
+	customElements.define("audio-player", AudioPlayer);
+</script>
