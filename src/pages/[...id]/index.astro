@@ -12,7 +12,11 @@ export async function getStaticPaths() {
 	const _pages = await reader().collections.pages.all();
 
 	const pages = _pages.filter((page) => {
-		return !page.slug.startsWith("lexikon/") && page.slug !== "kontakt";
+		return (
+			!page.slug.startsWith("lexikon/") &&
+			!page.slug.startsWith("forschung/kopisten/") &&
+			page.slug !== "kontakt"
+		);
 	});
 
 	return pages.flatMap((page) => {

@@ -16,6 +16,9 @@ export function useMDXComponents(): MDXComponents {
 		Download,
 		Embed,
 		Figure,
+		FootnoteContent,
+		FootnoteReference,
+		FootnotesSection,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		img: Img as any,
 		TranskriptionsTool,

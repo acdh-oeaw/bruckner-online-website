@@ -1,7 +1,15 @@
 import { createUrl, pick } from "@acdh-oeaw/lib";
 import { collection, config, fields, NotEditable, singleton } from "@keystatic/core";
 import { block, mark, wrapper } from "@keystatic/core/content-components";
-import { DownloadIcon, ImageIcon, PencilIcon, PlayIcon, ScanIcon, VideoIcon } from "lucide-react";
+import {
+	DownloadIcon,
+	ImageIcon,
+	PencilIcon,
+	PlayIcon,
+	ScanIcon,
+	SuperscriptIcon,
+	VideoIcon,
+} from "lucide-react";
 
 import { Logo } from "@/components/logo";
 import { createAssetPaths, createPreviewUrl } from "@/config/content.config";
@@ -9,7 +17,9 @@ import { env } from "@/config/env.config";
 
 function createComponents(
 	assetPath: `/${string}/`,
-	components?: Array<"Download" | "Figure" | "Video">,
+	components?: Array<
+		"AudioPlayer" | "Download" | "Embed" | "Figure" | "Footnote" | "TranskriptionsTool" | "Video"
+	>,
 ) {
 	const allComponents = {
 		AudioPlayer: block({
@@ -103,6 +113,12 @@ function createComponents(
 					// validation: { isRequired: false },
 				}),
 			},
+		}),
+		Footnote: mark({
+			label: "Footnote",
+			icon: <SuperscriptIcon />,
+			className: "underline decoration-dotted align-super text-sm",
+			schema: {},
 		}),
 		TranskriptionsTool: block({
 			label: "TranskriptionsTool",

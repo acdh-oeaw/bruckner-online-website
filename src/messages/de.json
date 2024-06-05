@@ -32,8 +32,27 @@
 			"title": "Startseite"
 		}
 	},
+	"KopistenNav": {
+		"nav": "Kopisten",
+		"links": {
+			"project": "Projektbeschreibung",
+			"about": "Über das Projekt",
+			"introduction": "Einleitung",
+			"userguide": "Benutzungshinweise und Anlage",
+			"methodology": "Methodik",
+			"authors-note": "Nachtrag der Verfasser",
+			"primary-sources": "Kopisten der Primärquellen",
+			"secondary-sources": "Kopisten der Sekundärquellen",
+			"not-vienna": "Kopisten der Werke Bruckners außerhalb Wiens",
+			"duration": "Zeitraum der Tätigkeit der Kopisten zu Bruckners Lebzeiten",
+			"toc": "Gesamtbestand aller Kopisten",
+			"catalogue": "Katalogzugänge",
+			"search": "Suche",
+			"compare": "Handschriftenvergleich"
+		}
+	},
 	"LexiconNav": {
-		"nav": "Lexicon",
+		"nav": "Lexikon",
 		"links": {
 			"abbreviations": "Abkürzungen",
 			"articles": "Artikel",
