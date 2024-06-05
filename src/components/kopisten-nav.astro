@@ -11,11 +11,12 @@ import { createI18n } from "@/lib/i18n";
 const { t } = await createI18n((Astro.currentLocale ?? defaultLocale) as Locale);
 
 const links: Array<
-	{
+	| {
 			kind: "menu";
 			label: string;
 			children: Array<{ kind: "link"; href: string; label: string; reload?: boolean }>;
-	  } | { kind: "link"; href: string; label: string; reload?: boolean }
+	  }
+	| { kind: "link"; href: string; label: string; reload?: boolean }
 > = [
 	{ kind: "link", href: "/forschung/kopisten", label: t("KopistenNav.links.about") },
 	{
