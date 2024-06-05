@@ -1,22 +1,21 @@
 ---
-import NavMenuLink from "@/components/navigation/nav-menu-link.astro";
-import { defaultLocale, type Locale } from "@/config/i18n.config";
-import { createI18n } from "@/lib/i18n";
-import Nav from "@/components/navigation/navigation.astro";
 import NavMenu from "@/components/navigation/nav-menu.astro";
 import NavMenuItem from "@/components/navigation/nav-menu-item.astro";
+import NavMenuLink from "@/components/navigation/nav-menu-link.astro";
 import NavMenuPopover from "@/components/navigation/nav-menu-popover.astro";
 import NavMenuTrigger from "@/components/navigation/nav-menu-trigger.astro";
+import Nav from "@/components/navigation/navigation.astro";
+import { defaultLocale, type Locale } from "@/config/i18n.config";
+import { createI18n } from "@/lib/i18n";
 
 const { t } = await createI18n((Astro.currentLocale ?? defaultLocale) as Locale);
 
 const links: Array<
-	| { kind: "link"; href: string; label: string; reload?: boolean }
-	| {
+	{
 			kind: "menu";
 			label: string;
 			children: Array<{ kind: "link"; href: string; label: string; reload?: boolean }>;
-	  }
+	  } | { kind: "link"; href: string; label: string; reload?: boolean }
 > = [
 	{ kind: "link", href: "/forschung/kopisten", label: t("KopistenNav.links.about") },
 	{

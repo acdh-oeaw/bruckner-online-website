@@ -1,51 +1,57 @@
-import type { Root } from "mdast";
-import type { MdxJsxAttribute, MdxJsxFlowElement, MdxJsxTextElement } from "mdast-util-mdx";
+import { assert } from "@acdh-oeaw/lib";
+import type { Root } from "hast";
+import type {
+	MdxJsxAttribute,
+	MdxJsxFlowElementHast,
+	MdxJsxTextElementHast,
+} from "mdast-util-mdx-jsx";
 import { SKIP, visit } from "unist-util-visit";
 
 export function withMdxFootnotes() {
 	return function transformer(tree: Root) {
 		let count = 1;
 
-		const footnotes: Array<MdxJsxTextElement> = [];
+		const footnotes: Array<MdxJsxTextElementHast> = [];
 
 		visit(tree, "mdxJsxTextElement", (node, index, parent) => {
-			if (node.name === "Footnote") {
-				const countAttribute: MdxJsxAttribute = {
-					type: "mdxJsxAttribute",
-					name: "count",
-					value: String(count),
-				};
+			if (node.name !== "Footnote") return undefined;
 
-				const reference: MdxJsxTextElement = {
-					type: "mdxJsxTextElement",
-					name: "FootnoteReference",
-					attributes: [countAttribute],
-					children: [],
-				};
+			assert(parent);
+			assert(index);
 
-				const content: MdxJsxTextElement = {
-					type: "mdxJsxTextElement",
-					name: "FootnoteContent",
-					attributes: [countAttribute],
-					children: node.children,
-				};
+			const countAttribute: MdxJsxAttribute = {
+				type: "mdxJsxAttribute",
+				name: "count",
+				value: String(count),
+			};
 
-				// @ts-expect-error Parent node exists.
-				parent.children.splice(index, 1, reference);
-				footnotes.push(content);
+			const reference: MdxJsxTextElementHast = {
+				type: "mdxJsxTextElement",
+				name: "FootnoteReference",
+				attributes: [countAttribute],
+				children: [],
+			};
 
-				count++;
-			}
+			const content: MdxJsxTextElementHast = {
+				type: "mdxJsxTextElement",
+				name: "FootnoteContent",
+				attributes: [countAttribute],
+				children: node.children,
+			};
+
+			parent.children.splice(index, 1, reference);
+			footnotes.push(content);
+
+			count++;
 
 			return SKIP;
 		});
 
 		if (footnotes.length > 0) {
-			const section: MdxJsxFlowElement = {
+			const section: MdxJsxFlowElementHast = {
 				type: "mdxJsxFlowElement",
 				name: "FootnotesSection",
 				attributes: [],
-				// @ts-expect-error Should be fine to set `MdxJsxTextElement` children.
 				children: footnotes,
 			};
 

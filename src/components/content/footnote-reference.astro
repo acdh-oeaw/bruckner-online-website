@@ -1,0 +1,13 @@
+---
+import { createFootnoteContentId, createFootnoteReferenceId } from "@/components/content/footnote";
+
+interface Props {
+	count: number;
+}
+
+const { count } = Astro.props;
+---
+
+<a href={`#${createFootnoteContentId(count)}`} id={createFootnoteReferenceId(count)}>
+	<sup>{count}</sup>
+</a>

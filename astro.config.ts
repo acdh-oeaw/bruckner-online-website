@@ -33,6 +33,7 @@ export default defineConfig({
 					"menu",
 					"quote",
 					"search",
+					"square-arrow-left",
 					"x",
 				],
 			},
