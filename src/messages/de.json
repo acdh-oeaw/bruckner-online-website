@@ -41,6 +41,7 @@
 	"KopistenNav": {
 		"nav": "Kopisten",
 		"links": {
+			"home": "Startseite",
 			"project": "Projektbeschreibung",
 			"about": "Über das Projekt",
 			"introduction": "Einleitung",
