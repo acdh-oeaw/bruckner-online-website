@@ -24,8 +24,8 @@ const { title, image } = page;
 const { default: Content } = await processMdx(await page.content(), locale);
 
 const schema = v.object({
-	letter: v.fallback(v.optional(v.string([v.regex(/\w/), v.toLowerCase()]), "a"), "a"),
-	start: v.fallback(v.optional(v.coerce(v.number(), Number), 1), 1),
+	letter: v.fallback(v.optional(v.pipe(v.string(), v.regex(/\w/), v.toLowerCase()), "a"), "a"),
+	start: v.fallback(v.optional(v.pipe(v.unknown(), v.transform(Number), v.number()), 1), 1),
 });
 const { letter, start } = v.parse(schema, {
 	letter: Astro.url.searchParams.get("letter"),

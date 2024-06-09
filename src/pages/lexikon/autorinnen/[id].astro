@@ -24,7 +24,7 @@ const documentTitle = page.title;
 const { title, image } = page;
 
 const schema = v.object({
-	start: v.fallback(v.optional(v.coerce(v.number(), Number), 1), 1),
+	start: v.fallback(v.optional(v.pipe(v.unknown(), v.transform(Number), v.number()), 1), 1),
 });
 const { start } = v.parse(schema, {
 	start: Astro.url.searchParams.get("start"),

@@ -37,10 +37,10 @@ if (Astro.request.method === "POST") {
 		const data = await Astro.request.formData();
 		const formData = getFormDataValues(data);
 		const schema = v.object({
-			name: v.string([v.minLength(1)]),
-			email: v.string([v.email()]),
-			message: v.string([v.minLength(1)]),
-			subject: v.string([v.minLength(1)]),
+			name: v.pipe(v.string(), v.nonEmpty()),
+			email: v.pipe(v.string(), v.email()),
+			message: v.pipe(v.string(), v.nonEmpty()),
+			subject: v.pipe(v.string(), v.nonEmpty()),
 		});
 		const result = v.safeParse(schema, formData);
 		if (!result.success) {

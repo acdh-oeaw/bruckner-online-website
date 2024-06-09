@@ -1,5 +1,7 @@
 import { createUrl } from "@acdh-oeaw/lib";
 
+import { defaultLocale } from "@/config/i18n.config";
+import { escape } from "@/lib/safe-json-ld-replacer";
 import { expect, test } from "~/e2e/lib/test";
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -13,9 +15,12 @@ test("should set a canonical url", async ({ createIndexPage }) => {
 	await expect(canonicalUrl).toHaveAttribute("href", String(createUrl({ baseUrl, pathname: "/" })));
 });
 
-test("should set document title on not-found page", async ({ page }) => {
+test("should set document title on not-found page", async ({ createI18n, page }) => {
+	const i18n = await createI18n();
 	await page.goto("/unknown/");
-	await expect(page).toHaveTitle("Seite nicht gefunden | Bruckner Online");
+	await expect(page).toHaveTitle(
+		[i18n.t("NotFoundPage.meta.title"), i18n.t("metadata.title")].join(" | "),
+	);
 });
 
 test("should disallow indexing of not-found page", async ({ page }) => {
@@ -26,10 +31,14 @@ test("should disallow indexing of not-found page", async ({ page }) => {
 });
 
 test("should set page metadata", async ({ createIndexPage }) => {
-	const { indexPage } = await createIndexPage();
+	const { indexPage, i18n } = await createIndexPage();
 	await indexPage.goto();
 
 	const { page } = indexPage;
+
+	expect(i18n.t("metadata.title")).toBeTruthy();
+	expect(i18n.t("metadata.shortTitle")).toBeTruthy();
+	expect(i18n.t("metadata.description")).toBeTruthy();
 
 	const ogType = page.locator('meta[property="og:type"]');
 	await expect(ogType).toHaveAttribute("content", "website");
@@ -37,44 +46,40 @@ test("should set page metadata", async ({ createIndexPage }) => {
 	const twCard = page.locator('meta[name="twitter:card"]');
 	await expect(twCard).toHaveAttribute("content", "summary_large_image");
 
-	// const twCreator = page.locator('meta[name="twitter:creator"]');
-	// await expect(twCreator).toHaveAttribute("content", "@acdh_oeaw");
+	const twCreator = page.locator('meta[name="twitter:creator"]');
+	await expect(twCreator).toHaveAttribute("content", i18n.t("metadata.twitter"));
 
-	// const twSite = page.locator('meta[name="twitter:site"]');
-	// await expect(twSite).toHaveAttribute("content", "@acdh_oeaw");
+	const twSite = page.locator('meta[name="twitter:site"]');
+	await expect(twSite).toHaveAttribute("content", i18n.t("metadata.twitter"));
 
 	// const googleSiteVerification = page.locator('meta[name="google-site-verification"]');
 	// await expect(googleSiteVerification).toHaveAttribute("content", "");
 
-	await expect(page).toHaveTitle("Startseite | Bruckner Online");
+	await expect(page).toHaveTitle(
+		[i18n.t("IndexPage.meta.title"), i18n.t("metadata.title")].join(" | "),
+	);
 
 	const metaDescription = page.locator('meta[name="description"]');
-	await expect(metaDescription).toHaveAttribute(
-		"content",
-		"bruckner-online.at ist ein umfangreich angelegtes Bruckner-Internet-Portal (Webarchiv), in dem neben der elektronischen Dokumentation sämtlicher hand­schriftlicher Quellen auch alle Kompositionen, relevante Personen und Orte enthalten sind. Zudem werden von allen Quellen, Erstdrucken und der Alten Gesamtausgabe vollständige Digitalisate zur Verfügung gestellt.",
-	);
+	await expect(metaDescription).toHaveAttribute("content", i18n.t("metadata.description"));
 
 	const ogTitle = page.locator('meta[property="og:title"]');
-	await expect(ogTitle).toHaveAttribute("content", "Startseite");
+	await expect(ogTitle).toHaveAttribute("content", i18n.t("IndexPage.meta.title"));
 
 	const ogDescription = page.locator('meta[property="og:description"]');
-	await expect(ogDescription).toHaveAttribute(
-		"content",
-		"bruckner-online.at ist ein umfangreich angelegtes Bruckner-Internet-Portal (Webarchiv), in dem neben der elektronischen Dokumentation sämtlicher hand­schriftlicher Quellen auch alle Kompositionen, relevante Personen und Orte enthalten sind. Zudem werden von allen Quellen, Erstdrucken und der Alten Gesamtausgabe vollständige Digitalisate zur Verfügung gestellt.",
-	);
+	await expect(ogDescription).toHaveAttribute("content", i18n.t("metadata.description"));
 
 	const ogSiteName = page.locator('meta[property="og:site_name"]');
-	await expect(ogSiteName).toHaveAttribute("content", "Bruckner Online");
+	await expect(ogSiteName).toHaveAttribute("content", i18n.t("metadata.title"));
 
 	const ogUrl = page.locator('meta[property="og:url"]');
 	await expect(ogUrl).toHaveAttribute("content", String(createUrl({ baseUrl, pathname: "/" })));
 
 	const ogLocale = page.locator('meta[property="og:locale"]');
-	await expect(ogLocale).toHaveAttribute("content", "de");
+	await expect(ogLocale).toHaveAttribute("content", defaultLocale);
 });
 
 test("should add json+ld metadata", async ({ createIndexPage }) => {
-	const { indexPage } = await createIndexPage();
+	const { indexPage, i18n } = await createIndexPage();
 	await indexPage.goto();
 
 	const metadata = await indexPage.page.locator('script[type="application/ld+json"]').textContent();
@@ -83,9 +88,8 @@ test("should add json+ld metadata", async ({ createIndexPage }) => {
 		JSON.stringify({
 			"@context": "https://schema.org",
 			"@type": "WebSite",
-			name: "Bruckner Online",
-			description:
-				"bruckner-online.at ist ein umfangreich angelegtes Bruckner-Internet-Portal (Webarchiv), in dem neben der elektronischen Dokumentation sämtlicher hand­schriftlicher Quellen auch alle Kompositionen, relevante Personen und Orte enthalten sind. Zudem werden von allen Quellen, Erstdrucken und der Alten Gesamtausgabe vollständige Digitalisate zur Verfügung gestellt.",
+			name: escape(i18n.t("metadata.title")),
+			description: escape(i18n.t("metadata.description")),
 		}),
 	);
 });
@@ -113,5 +117,5 @@ test("should set `lang` attribute on `html` element", async ({ createIndexPage }
 	const { indexPage } = await createIndexPage();
 	await indexPage.goto();
 
-	await expect(indexPage.page.locator("html")).toHaveAttribute("lang", "de");
+	await expect(indexPage.page.locator("html")).toHaveAttribute("lang", defaultLocale);
 });

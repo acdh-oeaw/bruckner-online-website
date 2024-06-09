@@ -65,17 +65,17 @@ test.describe("app", () => {
 		}
 	});
 
-	test("should serve a webmanifest", async ({ request }) => {
+	test("should serve a webmanifest", async ({ createI18n, request }) => {
 		const response = await request.get("/manifest.webmanifest");
 		const body = await response.body();
 
-		// TODO: use toMatchSnapshot
+		const i18n = await createI18n();
+
 		expect(body.toString()).toEqual(
 			JSON.stringify({
-				name: "Bruckner Online",
-				short_name: "Bruckner Online",
-				description:
-					"bruckner-online.at ist ein umfangreich angelegtes Bruckner-Internet-Portal (Webarchiv), in dem neben der elektronischen Dokumentation sämtlicher hand­schriftlicher Quellen auch alle Kompositionen, relevante Personen und Orte enthalten sind. Zudem werden von allen Quellen, Erstdrucken und der Alten Gesamtausgabe vollständige Digitalisate zur Verfügung gestellt.",
+				name: i18n.t("metadata.title"),
+				short_name: i18n.t("metadata.shortTitle"),
+				description: i18n.t("metadata.description"),
 				icons: [
 					{ src: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
 					{ src: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },

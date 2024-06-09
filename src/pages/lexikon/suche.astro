@@ -26,7 +26,7 @@ const { default: Content } = await processMdx(await page.content(), locale);
 const schema = v.object({
 	q: v.fallback(v.optional(v.string(), ""), ""),
 	field: v.fallback(v.optional(v.picklist(["title", "all"]), "title"), "title"),
-	start: v.fallback(v.optional(v.coerce(v.number(), Number), 1), 1),
+	start: v.fallback(v.optional(v.pipe(v.unknown(), v.transform(Number), v.number()), 1), 1),
 });
 const { q, field, start } = v.parse(schema, {
 	q: Astro.url.searchParams.get("q"),

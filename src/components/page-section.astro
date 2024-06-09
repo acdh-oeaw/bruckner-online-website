@@ -9,7 +9,7 @@ const { class: className, variant } = Astro.props;
 
 <section
 	class:list={[
-		"mx-auto w-full max-w-screen-lg px-4 py-4 grid gap-y-6",
+		"mx-auto grid w-full max-w-screen-lg gap-y-6 p-4",
 		variant === "full-height" ? "min-h-full" : undefined,
 		className,
 	]}
