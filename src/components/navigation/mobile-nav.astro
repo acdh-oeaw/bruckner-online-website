@@ -1,33 +1,27 @@
 ---
 import { Icon } from "astro-icon/components";
 
+import ContentLink from "@/components/content/link.astro";
 import { mobileNavId } from "@/components/navigation/constants";
-import NavLink from "@/components/navigation/nav-link.astro";
-import type { Navigation } from "@/lib/content/types";
-import navigation from "~/content/navigation.json";
+import { defaultLocale, type Locale } from "@/config/i18n.config";
+import { createSingletonResource } from "@/lib/keystatic/resources";
+
+const locale = (Astro.currentLocale as Locale | undefined) ?? defaultLocale;
+
+const navigation = await createSingletonResource("navigation", locale).read();
 ---
 
-<div id={mobileNavId} hidden class="px-4 pb-6 lg:hidden" data-mobile-nav>
+<div class="px-4 pb-6 lg:hidden" data-mobile-nav hidden id={mobileNavId}>
 	<ul class="grid gap-y-2 text-[#555]" role="list">
 		{
-			(navigation as Navigation).links.map((item) => {
+			navigation.data.links.map((item) => {
 				switch (item.discriminant) {
 					case "link": {
 						return (
 							<li>
-								<NavLink class="transition hover:text-[#212529]" href={item.value.href}>
+								<ContentLink class="transition hover:text-[#212529]" link={item.value.link}>
 									{item.value.label}
-								</NavLink>
-							</li>
-						);
-					}
-
-					case "page": {
-						return (
-							<li>
-								<NavLink class="transition hover:text-[#212529]" href={`/${item.value.reference}`}>
-									{item.value.label}
-								</NavLink>
+								</ContentLink>
 							</li>
 						);
 					}
@@ -45,30 +39,17 @@ import navigation from "~/content/navigation.json";
 										/>
 									</summary>
 									<ul class="ml-4 mt-2 grid gap-y-1" role="list">
-										{item.value.links.map((link) => {
-											switch (link.discriminant) {
+										{item.value.items.map((item) => {
+											switch (item.discriminant) {
 												case "link": {
 													return (
 														<li>
-															<NavLink
+															<ContentLink
 																class="transition hover:text-[#212529]"
-																href={link.value.href}
+																link={item.value.link}
 															>
-																{link.value.label}
-															</NavLink>
-														</li>
-													);
-												}
-
-												case "page": {
-													return (
-														<li>
-															<NavLink
-																class="transition hover:text-[#212529]"
-																href={`/${link.value.reference}`}
-															>
-																{link.value.label}
-															</NavLink>
+																{item.value.label}
+															</ContentLink>
 														</li>
 													);
 												}

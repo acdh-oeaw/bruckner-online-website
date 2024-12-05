@@ -6,16 +6,16 @@ import MainContent from "@/components/main-content.astro";
 import PageSection from "@/components/page-section.astro";
 import { defaultLocale, type Locale } from "@/config/i18n.config";
 import PageLayout from "@/layouts/page-layout.astro";
-import { reader } from "@/lib/content/reader";
 import { createI18n } from "@/lib/i18n";
+import { createSingletonResource } from "@/lib/keystatic/resources";
 
 const locale = (Astro.currentLocale ?? defaultLocale) as Locale;
 const { t } = await createI18n(locale);
 
-const page = await reader().singletons.indexPage.readOrThrow();
+const page = await createSingletonResource("index-page", locale).read();
 
 const documentTitle = t("IndexPage.meta.title");
-const { hero, links, quote } = page;
+const { hero, links, quote } = page.data;
 ---
 
 <PageLayout locale={locale} title={documentTitle}>

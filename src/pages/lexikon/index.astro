@@ -3,16 +3,15 @@ import LexiconSearchForm from "@/components/lexicon-search-form.astro";
 import { defaultLocale, type Locale } from "@/config/i18n.config";
 import LexiconLayout from "@/layouts/lexicon-layout.astro";
 import PageLayout from "@/layouts/page-layout.astro";
-import { processMdx } from "@/lib/content/mdx";
-import { reader } from "@/lib/content/reader";
+import { createCollectionResource } from "@/lib/keystatic/resources";
 
 const locale = (Astro.currentLocale ?? defaultLocale) as Locale;
 
-const page = await reader().collections.pages.readOrThrow("lexikon/index");
+const page = await createCollectionResource("pages", locale).read("lexikon/index");
 
-const documentTitle = page.title;
-const { title, image } = page;
-const { default: Content } = await processMdx(await page.content(), locale);
+const { title, image, content } = page.data;
+const documentTitle = title;
+const { default: Content } = await page.compile(content);
 ---
 
 <PageLayout locale={locale} title={documentTitle}>

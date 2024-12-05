@@ -4,7 +4,7 @@
 # @see https://sharp.pixelplumbing.com/install#linux-memory-allocator
 
 # base
-FROM node:20-alpine AS base
+FROM node:22-alpine AS base
 
 RUN corepack enable
 
@@ -19,7 +19,7 @@ RUN pnpm fetch --prod
 RUN pnpm install --frozen-lockfile --ignore-scripts --offline --prod
 
 # build
-FROM base as build
+FROM base AS build
 
 RUN pnpm fetch --dev
 
@@ -47,6 +47,8 @@ RUN pnpm install --frozen-lockfile --offline
 
 ENV NODE_ENV=production
 
+# to mount secrets which need to be available at build time
+# @see https://docs.docker.com/build/building/secrets/
 RUN --mount=type=secret,id=KEYSTATIC_GITHUB_CLIENT_ID,uid=1000 \
 		--mount=type=secret,id=KEYSTATIC_GITHUB_CLIENT_SECRET,uid=1000 \
 		--mount=type=secret,id=KEYSTATIC_SECRET,uid=1000 \
@@ -56,7 +58,7 @@ RUN --mount=type=secret,id=KEYSTATIC_GITHUB_CLIENT_ID,uid=1000 \
 		pnpm run build
 
 # serve
-FROM node:20-alpine AS serve
+FROM node:22-alpine AS serve
 
 RUN mkdir /app && chown -R node:node /app
 WORKDIR /app
@@ -65,10 +67,6 @@ USER node
 
 COPY --from=base --chown=node:node /app/node_modules ./node_modules
 COPY --from=build --chown=node:node /app/dist ./
-
-# these content pages need to be available at runtime, because they are not prerendered.
-COPY --chown=node:node ./content/pages/lexikon ./content/pages/lexikon
-COPY --chown=node:node ./content/pages/kontakt.mdx ./content/pages/kontakt.mdx
 
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0

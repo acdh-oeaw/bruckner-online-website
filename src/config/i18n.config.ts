@@ -1,5 +1,5 @@
 import type de from "@/messages/de.json";
-import type metadataDe from "~/content/metadata.json";
+import type metadataDe from "~/content/de/metadata/index.json";
 
 export const locales = ["de"] as const;
 

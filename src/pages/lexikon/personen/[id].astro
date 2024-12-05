@@ -4,8 +4,8 @@ import { assert, createUrl, request } from "@acdh-oeaw/lib";
 import { defaultLocale, type Locale } from "@/config/i18n.config";
 import LexiconLayout from "@/layouts/lexicon-layout.astro";
 import PageLayout from "@/layouts/page-layout.astro";
-import { reader } from "@/lib/content/reader";
 import { createI18n } from "@/lib/i18n";
+import { createCollectionResource } from "@/lib/keystatic/resources";
 import { baseUrl } from "@/lib/lexicon";
 
 export const prerender = false;
@@ -16,22 +16,21 @@ assert(id, "Missing id.");
 const locale = (Astro.currentLocale ?? defaultLocale) as Locale;
 const { t } = await createI18n(locale);
 
-const page = await reader().collections.pages.readOrThrow("lexikon/personen");
+const page = await createCollectionResource("pages", locale).read("lexikon/personen");
 
-const documentTitle = page.title;
-const { title, image } = page;
+const { title, image } = page.data;
+const documentTitle = title;
 
 async function api(): Promise<{ data: null; error: string } | { data: string; error: null }> {
 	const url = createUrl({
 		baseUrl,
-		/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
 		pathname: `/article/${id!}`,
 	});
 
 	try {
 		const data = (await request(url, { responseType: "text" })) as string;
 		return { data, error: null };
-	} catch (error) {
+	} catch {
 		return { data: null, error: t("SearchResults.error") };
 	}
 }

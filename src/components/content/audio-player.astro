@@ -16,8 +16,8 @@ const { tracks } = Astro.props;
 					<li class="grid">
 						<audio-track
 							class="select-none rounded-md border px-4 py-1 transition hover:bg-neutral-100 data-[current]:bg-neutral-100"
-							data-title={track.title}
 							data-href={track.file}
+							data-title={track.title}
 							tabIndex={0}
 						>
 							{track.title}
@@ -82,7 +82,7 @@ const { tracks } = Astro.props;
 				const track = this.tracks[this.currentTrack];
 				assert(track);
 				this.dataset.state = "play";
-				this.track.textContent = "Sie hören: " + track.title;
+				this.track.textContent = `Sie hören: ${track.title}`;
 				this.tracks.forEach(({ element }) => {
 					if (element === track.element) {
 						element.dataset.current = "";

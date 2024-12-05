@@ -27,8 +27,8 @@ const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? de
 
 <image-carousel>
 	<div
-		aria-roledescription="carousel"
 		aria-label={title}
+		aria-roledescription="carousel"
 		class="group relative"
 		data-carousel
 		data-state="paused"
@@ -74,7 +74,7 @@ const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? de
 			</div>
 		</div>
 
-		<div id={id} aria-live="off" class="relative aspect-[2.125]" data-carousel-items>
+		<div aria-live="off" class="relative aspect-[2.125]" data-carousel-items id={id}>
 			{
 				slides.map((slide, index) => {
 					const alignments = {
@@ -86,19 +86,19 @@ const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? de
 
 					return (
 						<div
-							data-carousel-item
-							data-active={index === 0 ? "" : undefined}
-							role="group"
-							aria-roledescription="slide"
 							aria-label={t("ImageCarousel.slide", {
 								current: index,
 								total: slides.length,
 							})}
+							aria-roledescription="slide"
 							class="group relative size-full"
+							data-active={index === 0 ? "" : undefined}
+							data-carousel-item
+							role="group"
 						>
 							<a
-								class="block size-full -outline-offset-2 focus-visible:outline-white"
 								aria-label={slide.title}
+								class="block size-full -outline-offset-2 focus-visible:outline-white"
 								href={href}
 							>
 								<Image

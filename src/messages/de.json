@@ -1,4 +1,8 @@
 {
+	"mdx": {
+		"footnote-back-label": "Zurück zu Verweis {reference}",
+		"footnotes": "Fußnoten"
+	},
 	"ContactPage": {
 		"form": {
 			"email": "Email",
@@ -10,12 +14,6 @@
 			"submit": "Absenden",
 			"unknown-error": "Konnte Nachricht nicht senden."
 		}
-	},
-	"FootnoteContent": {
-		"back": "Zurück zu Referenz {count}"
-	},
-	"FootnoteSection": {
-		"footnotes": "Fußnoten"
 	},
 	"ImageCarousel": {
 		"next": "Nächste",
@@ -80,10 +78,6 @@
 		"field": "Suchfelder",
 		"all-fields": "in allen Feldern",
 		"headings": "Artikelüberschrift"
-	},
-	"Mdx": {
-		"FootnoteBackLabel": "Zurück zu Referenz {reference}",
-		"Footnotes": "Fußnoten"
 	},
 	"MobileNavToggle": {
 		"label": "Navigationsmenü öffnen"
