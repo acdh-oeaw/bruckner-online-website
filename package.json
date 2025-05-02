@@ -43,6 +43,8 @@
 		"@astrojs/sitemap": "^3.1.6",
 		"@floating-ui/dom": "^1.6.5",
 		"@fontsource-variable/inter": "^5.0.18",
+		"@fontsource-variable/open-sans": "^5.2.5",
+		"@fontsource/open-sans-condensed": "^4.5.5",
 		"@iconify-json/lucide": "^1.1.194",
 		"@keystatic/astro": "^5.0.0",
 		"@keystatic/core": "^0.5.22",

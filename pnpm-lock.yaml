@@ -35,6 +35,12 @@ importers:
       '@fontsource-variable/inter':
         specifier: ^5.0.18
         version: 5.0.18
+      '@fontsource-variable/open-sans':
+        specifier: ^5.2.5
+        version: 5.2.5
+      '@fontsource/open-sans-condensed':
+        specifier: ^4.5.5
+        version: 4.5.5
       '@iconify-json/lucide':
         specifier: ^1.1.194
         version: 1.1.194
@@ -778,6 +784,12 @@ packages:
 
   '@fontsource-variable/inter@5.0.18':
     resolution: {integrity: sha512-rJzSrtJ3b7djiGFvRuTe6stDfbYJGhdQSfn2SI2WfXviee7Er0yKAHE5u7FU7OWVQQQ1x3+cxdmx9NdiAkcrcA==}
+
+  '@fontsource-variable/open-sans@5.2.5':
+    resolution: {integrity: sha512-++xRfkZAxNP4e1Spm5W11iVcoYfXcNVTV5MDit60t7grRk10hy9C7XQd/jv+0TDFIfHbK9EzyBp3M3CHPesroA==}
+
+  '@fontsource/open-sans-condensed@4.5.5':
+    resolution: {integrity: sha512-ah6DBSWgjWEG20tVJnvcUQ/8XTfnGpuOGK4HLTF91vtrGg7PyrdEMlao/O1+S4i+SzeuJCmf5Qbc3eWponBL3Q==}
 
   '@formatjs/ecma402-abstract@1.18.2':
     resolution: {integrity: sha512-+QoPW4csYALsQIl8GbN14igZzDbuwzcpWrku9nyMXlaqAlwRBgl5V+p0vWMGFqHOw37czNXaP/lEk4wbLgcmtA==}
@@ -2687,6 +2699,7 @@ packages:
   eslint-plugin-i@2.29.1:
     resolution: {integrity: sha512-ORizX37MelIWLbMyqI7hi8VJMf7A0CskMmYkB+lkCX3aF4pkGV7kwx5bSEb4qx7Yce2rAf9s34HqDRPjGRZPNQ==}
     engines: {node: '>=12'}
+    deprecated: Please migrate to the brand new `eslint-plugin-import-x` instead
     peerDependencies:
       eslint: ^7.2.0 || ^8
 
@@ -5964,6 +5977,10 @@ snapshots:
   '@floating-ui/utils@0.2.2': {}
 
   '@fontsource-variable/inter@5.0.18': {}
+
+  '@fontsource-variable/open-sans@5.2.5': {}
+
+  '@fontsource/open-sans-condensed@4.5.5': {}
 
   '@formatjs/ecma402-abstract@1.18.2':
     dependencies:
