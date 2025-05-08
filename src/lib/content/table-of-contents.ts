@@ -56,13 +56,11 @@ export const withTableOfContents = function withTableOfContents() {
 					previous.children ??= [];
 					parents.push(previous);
 				} else if (heading.depth < previous.depth) {
-					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 					while (parents[parents.length - 1]!.depth >= heading.depth) {
 						parents.pop();
 					}
 				}
 
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				parents[parents.length - 1]!.children!.push(heading);
 				previous = heading;
 			});
@@ -80,7 +78,7 @@ export const withMdxTableOfContents = function withMdxTableOfContents() {
 
 		tree.children.unshift({
 			type: "mdxjsEsm",
-			value: `export const tableOfContents = ${JSON.stringify(vfile.data.toc)};`,
+			value: `export const ${name} = ${JSON.stringify(vfile.data.toc)};`,
 			data: {
 				estree: {
 					type: "Program",
@@ -90,6 +88,7 @@ export const withMdxTableOfContents = function withMdxTableOfContents() {
 							type: "ExportNamedDeclaration",
 							source: null,
 							specifiers: [],
+							attributes: [],
 							declaration: {
 								type: "VariableDeclaration",
 								kind: "const",
