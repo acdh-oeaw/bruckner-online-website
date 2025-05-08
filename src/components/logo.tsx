@@ -1,3 +1,5 @@
+/* @jsxImportSource react */
+
 import type { ReactNode } from "react";
 
 interface LogoProps {
@@ -5,12 +7,11 @@ interface LogoProps {
 }
 
 export function Logo(props: LogoProps): ReactNode {
-	const { className } = props;
-
 	return (
 		<svg
 			aria-hidden={true}
-			className={className}
+			// eslint-disable-next-line
+			className={props.className}
 			height={16}
 			viewBox="311.787 344.453 90.517 100"
 			width={16}
