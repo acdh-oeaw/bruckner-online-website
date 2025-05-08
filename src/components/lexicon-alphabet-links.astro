@@ -7,8 +7,12 @@ interface Props {
 
 const { current } = Astro.props;
 
-const alpha = range(0, 25).map((i) => i + 97);
-const alphabet = alpha.map((x) => String.fromCharCode(x));
+const alpha = range(0, 25).map((i) => {
+	return i + 97;
+});
+const alphabet = alpha.map((x) => {
+	return String.fromCharCode(x);
+});
 ---
 
 <div class="flex gap-1">

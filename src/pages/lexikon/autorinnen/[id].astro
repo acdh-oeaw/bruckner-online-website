@@ -1,5 +1,5 @@
 ---
-import { assert, createUrl, createUrlSearchParams, request } from "@acdh-oeaw/lib";
+import { assert, createUrl, createUrlSearchParams, log, request } from "@acdh-oeaw/lib";
 import * as v from "valibot";
 
 import { defaultLocale, type Locale } from "@/config/i18n.config";
@@ -48,6 +48,7 @@ async function api(): Promise<
 		const data = (await request(url, { responseType: "json" })) as ArticleSearchResponse;
 		return { data, error: null };
 	} catch (error) {
+		log.error(error);
 		return { data: null, error: t("SearchResults.error") };
 	}
 }

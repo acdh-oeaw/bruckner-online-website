@@ -1,5 +1,5 @@
 ---
-import { createUrl, createUrlSearchParams, request } from "@acdh-oeaw/lib";
+import { createUrl, createUrlSearchParams, log, request } from "@acdh-oeaw/lib";
 import * as v from "valibot";
 
 import LexiconAlphabetLinks from "@/components/lexicon-alphabet-links.astro";
@@ -45,6 +45,7 @@ async function api(): Promise<
 		const data = (await request(url, { responseType: "json" })) as ArticleSearchResponse;
 		return { data, error: null };
 	} catch (error) {
+		log.error(error);
 		return { data: null, error: t("SearchResults.error") };
 	}
 }
