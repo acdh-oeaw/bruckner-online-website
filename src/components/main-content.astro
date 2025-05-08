@@ -8,7 +8,7 @@ const { class: className, search } = Astro.props;
 ---
 
 <main
-	class:list={["isolate bg-[#e4ded2]", className]}
+	class:list={["isolate bg-[url(/assets/images/bg_1.jpg)] bg-repeat", className]}
 	id="main-content"
 	data-pagefind-body={search === "exclude" ? undefined : ""}
 	tabindex={-1}

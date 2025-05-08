@@ -8,7 +8,9 @@ const { t } = await createI18n(Astro.currentLocale as Locale | undefined);
 
 <footer class="bg-[#3a3a3a] text-[#aaa]">
 	<div class="mx-auto grid w-full max-w-screen-lg gap-y-6 px-4 py-12 text-sm">
-		<div class="grid grid-cols-[75px_1fr] items-start gap-x-8 gap-y-6 md:grid-cols-[75px_1fr_1fr]">
+		<div
+			class="relative grid grid-cols-[75px_1fr] items-start gap-x-8 gap-y-6 md:grid-cols-[75px_1fr_1fr_0.5fr]"
+		>
 			<div class="grid gap-y-4">
 				<a class="inline-flex py-1 focus-visible:outline-white" href="https://www.oeaw.ac.at/">
 					<img alt="" class="h-16 w-auto" loading="lazy" src="/assets/images/oeaw-logo-dark.png" />
@@ -70,15 +72,18 @@ const { t } = await createI18n(Astro.currentLocale as Locale | undefined);
 					</a>
 					<div>und</div>
 					<a class="inline-flex py-1 focus-visible:outline-white" href="http://www.onb.ac.at/">
-						<img
-							alt=""
-							class="h-16 w-auto"
-							loading="lazy"
-							src="/assets/images/oenb-logo-dark.png"
-						/>
+						<img alt="" class="size-auto" loading="lazy" src="/assets/images/oenb-logo-dark.png" />
 						<span class="sr-only">Österreichische Nationalbibliothek</span>
 					</a>
 				</div>
+			</div>
+			<div class="hidden md:grid">
+				<img
+					alt=""
+					class="absolute -top-28 right-4 h-60 rotate-[var(--footer-image-rotation)]"
+					loading="lazy"
+					src="/assets/images/footer_img_kk.png"
+				/>
 			</div>
 		</div>
 	</div>
