@@ -26,7 +26,7 @@ const { hero, links, quote } = page;
 			<ImageCarousel slides={hero.slides} title={t("IndexPage.carousel.title")} />
 		</PageSection>
 
-		<PageSection>
+		<PageSection class="hidden md:block">
 			<blockquote class="flex items-center gap-x-8 bg-white py-8 pl-8 pr-12 text-lg shadow-xl">
 				<Icon aria-hidden="true" class="size-12" name="lucide:quote" />
 				{quote}
@@ -34,7 +34,7 @@ const { hero, links, quote } = page;
 		</PageSection>
 
 		<PageSection>
-			<div class="grid grid-cols-3 gap-6">
+			<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
 				{
 					links.map((link, index) => {
 						const colors = ["bg-brand-orange", "bg-brand-red", "bg-brand-blue"];

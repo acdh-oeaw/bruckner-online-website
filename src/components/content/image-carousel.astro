@@ -33,7 +33,7 @@ const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? de
 		data-carousel
 		data-state="paused"
 	>
-		<div data-controls>
+		<div data-controls class="hidden md:block">
 			<div class="absolute left-8 top-8 z-10">
 				<button
 					class="rounded-md bg-[#00000080] p-2 text-white transition hover:bg-[#000000a0] focus-visible:bg-[#000000a0] focus-visible:outline-white"
@@ -110,7 +110,7 @@ const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? de
 							</a>
 							<div
 								class:list={[
-									"absolute bottom-0 grid w-96 gap-y-2 border-t-4 border-brand-red bg-[#00000080] p-8 text-white",
+									"absolute bottom-0 hidden md:grid w-96 gap-y-2 border-t-4 border-brand-red bg-[#00000080] p-8 text-white",
 									alignments[slide.alignment],
 								]}
 							>
