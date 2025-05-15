@@ -2,15 +2,17 @@
 interface Props {
 	class?: string;
 	variant?: "full-height";
+	fullWidth?: boolean;
 }
 
-const { class: className, variant } = Astro.props;
+const { class: className, variant, fullWidth = false } = Astro.props;
 ---
 
 <section
 	class:list={[
-		"mx-auto grid w-full max-w-screen-lg gap-y-6 p-4",
+		"mx-auto grid w-full gap-y-6 p-4",
 		variant === "full-height" ? "min-h-full" : undefined,
+		fullWidth ? undefined : " max-w-screen-lg",
 		className,
 	]}
 >
