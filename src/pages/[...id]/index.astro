@@ -30,6 +30,9 @@ const { page } = Astro.props;
 
 const documentTitle = page.title;
 const { title, image } = page;
+const tablesStriped = page["tables-striped"];
+const classes = `leading-7 ${tablesStriped ? "tables-striped" : undefined}`;
+
 const { default: Content } = await processMdx(await page.content(), locale);
 ---
 
@@ -38,7 +41,7 @@ const { default: Content } = await processMdx(await page.content(), locale);
 		<PageSection variant="full-height">
 			<PageCard image={image}>
 				<PageTitle>{title}</PageTitle>
-				<div class="leading-7">
+				<div class={classes}>
 					<Content />
 				</div>
 			</PageCard>

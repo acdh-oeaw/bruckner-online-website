@@ -62,6 +62,11 @@ export default config({
 					multiline: true,
 					// validation: { isRequired: true },
 				}),
+				"tables-striped": fields.checkbox({
+					label: "Stripped Table Layout",
+					description:
+						"Activate if tables on this page should have different background colors for even and odd rows.",
+				}),
 				content: fields.mdx({
 					label: "Content",
 					options: {
