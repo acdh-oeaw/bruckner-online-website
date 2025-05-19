@@ -67,6 +67,18 @@ export default config({
 					description:
 						"Activate if tables on this page should have different background colors for even and odd rows.",
 				}),
+				vita: fields.array(
+					fields.object({
+						period: fields.text({ label: "Period" }),
+						description: fields.mdx.inline({ label: "Description" }),
+					}),
+					{
+						label: "Vita entries",
+						itemLabel: (props) => {
+							return props.fields.period.value;
+						},
+					},
+				),
 				content: fields.mdx({
 					label: "Content",
 					options: {
