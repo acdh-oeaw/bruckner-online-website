@@ -1,0 +1,41 @@
+---
+import Embed from "@/components/content/embed.astro";
+import MainContent from "@/components/main-content.astro";
+import PageCard from "@/components/page-card.astro";
+import PageSection from "@/components/page-section.astro";
+import PageTitle from "@/components/page-title.astro";
+import { defaultLocale, type Locale } from "@/config/i18n.config";
+import PageLayout from "@/layouts/page-layout.astro";
+import { processMdx } from "@/lib/content/mdx";
+import { reader } from "@/lib/content/reader";
+
+export const prerender = false;
+
+const locale = (Astro.currentLocale ?? defaultLocale) as Locale;
+
+const page = await reader().collections.pages.readOrThrow("werkverzeichnis/wab");
+
+const documentTitle = page.title;
+const { title, image } = page;
+const { default: Content } = await processMdx(await page.content(), locale);
+
+const wabId = Astro.url.searchParams.get("WAB");
+
+const wabEndpoint = wabId
+	? `https://apps-mufo.oeaw.ac.at/dcm/wab/document.xq?doc=${wabId}.xml`
+	: "https://apps-mufo.oeaw.ac.at/dcm/wab/navigation.xq";
+---
+
+<PageLayout locale={locale} title={documentTitle}>
+	<MainContent>
+		<PageSection variant="full-height">
+			<PageCard image={image}>
+				<PageTitle>{title}</PageTitle>
+				<div>
+					<Content />
+					<Embed caption="Werkverzeichnis Anton Bruckner" href={wabEndpoint} />
+				</div>
+			</PageCard>
+		</PageSection>
+	</MainContent>
+</PageLayout>
