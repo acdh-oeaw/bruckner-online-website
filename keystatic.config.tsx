@@ -304,6 +304,73 @@ export default config({
 											label: "Separator",
 											schema: fields.empty(),
 										},
+										section: {
+											label: "Section",
+											itemLabel(props) {
+												return props.fields.label.value;
+											},
+											schema: fields.object({
+												label: fields.text({
+													label: "Section Title",
+													validation: { isRequired: true },
+												}),
+												links: fields.blocks(
+													{
+														link: {
+															label: "Link",
+															itemLabel(props) {
+																return props.fields.label.value;
+															},
+															schema: fields.object(
+																{
+																	label: fields.text({
+																		label: "Label",
+																		validation: { isRequired: true },
+																	}),
+																	href: fields.url({
+																		label: "URL",
+																		validation: { isRequired: true },
+																	}),
+																},
+																{
+																	label: "Link",
+																},
+															),
+														},
+														page: {
+															label: "Page",
+															itemLabel(props) {
+																return props.fields.label.value;
+															},
+															schema: fields.object(
+																{
+																	label: fields.text({
+																		label: "Label",
+																		validation: { isRequired: true },
+																	}),
+																	reference: fields.relationship({
+																		label: "Page",
+																		collection: "pages",
+																		validation: { isRequired: true },
+																	}),
+																},
+																{
+																	label: "Page",
+																},
+															),
+														},
+														separator: {
+															label: "Separator",
+															schema: fields.empty(),
+														},
+													},
+													{
+														label: "Links",
+														validation: { length: { min: 1 } },
+													},
+												),
+											}),
+										},
 									},
 									{
 										label: "Links",

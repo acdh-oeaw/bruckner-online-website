@@ -7,6 +7,7 @@ import NavMenu from "@/components/navigation/nav-menu.astro";
 import NavMenuItem from "@/components/navigation/nav-menu-item.astro";
 import NavMenuLink from "@/components/navigation/nav-menu-link.astro";
 import NavMenuPopover from "@/components/navigation/nav-menu-popover.astro";
+import NavMenuSection from "@/components/navigation/nav-menu-section.astro";
 import NavMenuTrigger from "@/components/navigation/nav-menu-trigger.astro";
 import Nav from "@/components/navigation/navigation.astro";
 import type { Locale } from "@/config/i18n.config";
@@ -56,7 +57,7 @@ const home = t("WebsiteHeader.links.home");
 										<NavMenu>
 											<NavMenuTrigger>{item.value.label}</NavMenuTrigger>
 											<NavMenuPopover>
-												<ul role="list">
+												<ul role="list" class="divide-y">
 													{item.value.links.map((link) => {
 														switch (link.discriminant) {
 															case "link": {
@@ -76,6 +77,46 @@ const home = t("WebsiteHeader.links.home");
 																			{link.value.label}
 																		</NavMenuItem>
 																	</li>
+																);
+															}
+
+															case "section": {
+																return (
+																	<NavMenuSection title={link.value.label}>
+																		<ul role="list" class="divide-y">
+																			{link.value.links.map((link) => {
+																				switch (link.discriminant) {
+																					case "link": {
+																						return (
+																							<li class="px-4">
+																								<NavMenuItem href={link.value.href}>
+																									{link.value.label}
+																								</NavMenuItem>
+																							</li>
+																						);
+																					}
+
+																					case "page": {
+																						return (
+																							<li class="px-4">
+																								<NavMenuItem href={`/${link.value.reference}`}>
+																									{link.value.label}
+																								</NavMenuItem>
+																							</li>
+																						);
+																					}
+
+																					case "separator": {
+																						return <hr />;
+																					}
+
+																					default: {
+																						return null;
+																					}
+																				}
+																			})}
+																		</ul>
+																	</NavMenuSection>
 																);
 															}
 
