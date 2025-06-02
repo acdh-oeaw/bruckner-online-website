@@ -69,6 +69,7 @@ COPY --from=build --chown=node:node /app/dist ./
 # these content pages need to be available at runtime, because they are not prerendered.
 COPY --chown=node:node ./content/pages/lexikon ./content/pages/lexikon
 COPY --chown=node:node ./content/pages/kontakt.mdx ./content/pages/kontakt.mdx
+COPY --chown=node:node ./content/pages/werkverzeichnis/wab ./content/pages/werkverzeichnis/wab
 
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
