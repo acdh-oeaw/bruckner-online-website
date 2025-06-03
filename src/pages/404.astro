@@ -6,6 +6,8 @@ import { defaultLocale, type Locale } from "@/config/i18n.config";
 import PageLayout from "@/layouts/page-layout.astro";
 import { createI18n } from "@/lib/i18n";
 
+export const prerender = false;
+
 const locale = (Astro.currentLocale ?? defaultLocale) as Locale;
 const { t } = await createI18n(locale);
 
