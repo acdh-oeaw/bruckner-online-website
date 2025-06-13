@@ -181,6 +181,7 @@ function create(
 				logo: fields.image({
 					label: "Logo",
 					validation: { isRequired: false },
+					...createAssetPaths(assetPath),
 				}),
 			},
 			ContentView(props) {
