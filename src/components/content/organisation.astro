@@ -1,7 +1,7 @@
 ---
 import slugify from "@sindresorhus/slugify";
-import { Image } from "astro:assets";
-import { getImageImport } from "@/lib/get-image-import";
+// import { Image } from "astro:assets";
+// import { getImageImport } from "@/lib/get-image-import";
 
 interface Props {
 	name: string;
@@ -17,19 +17,19 @@ const { address, email, logo, name, phone, website } = Astro.props;
 const id = slugify(name);
 ---
 
-<div class="grid sm:grid-cols-[160px_1fr] gap-x-8 py-6 border-b">
+<div class="grid gap-x-8 border-b py-6 sm:grid-cols-[160px_1fr]">
 	<div class="not-prose my-2">
 		{
 			logo ? (
 				/** These images are tiny already, we shouldn't need to optimise anything. */
 				website ? (
-					<a aria-labelledby={id} class="grid object-contain w-full" href={website}>
+					<a aria-labelledby={id} class="grid w-full object-contain" href={website}>
 						{/* <Image alt="" src={getImageImport(logo)} /> */}
 						<img alt="" src={logo} />
 					</a>
 				) : (
 					// <Image alt="" class="object-contain w-full" src={getImageImport(logo)} />
-					<img alt="" class="object-contain w-full" src={logo} />
+					<img alt="" class="w-full object-contain" src={logo} />
 				)
 			) : null
 		}

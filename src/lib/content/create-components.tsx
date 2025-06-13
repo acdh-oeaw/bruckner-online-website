@@ -13,8 +13,9 @@ import {
 	SuperscriptIcon,
 	VideoIcon,
 } from "lucide-react";
-import { useObjectUrl } from "@/lib/content/use-object-url";
+
 import { createAssetPaths } from "@/lib/content/create-asset-paths";
+import { useObjectUrl } from "@/lib/content/use-object-url";
 
 /** @see https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts */
 export const calloutKinds = [
@@ -190,7 +191,7 @@ function create(
 				const src = useObjectUrl(logo);
 
 				return (
-					// @ts-expect-error
+					// @ts-expect-error Type mismatch for ReactNode between react 18 and 19 types.
 					<NotEditable className="flex flex-col gap-y-2">
 						<div>{src ? <img alt="" src={src} /> : null}</div>
 						<div className="flex flex-col gap-y-0.5">
