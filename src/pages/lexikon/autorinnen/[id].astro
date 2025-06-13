@@ -21,7 +21,7 @@ const { t } = await createI18n(locale);
 const page = await reader().collections.pages.readOrThrow("lexikon/autorinnen");
 
 const documentTitle = page.title;
-const { title, image } = page;
+const { title } = page;
 
 const schema = v.object({
 	start: v.fallback(v.optional(v.pipe(v.unknown(), v.transform(Number), v.number()), 1), 1),
@@ -57,7 +57,7 @@ const { data, error } = await api();
 ---
 
 <PageLayout locale={locale} title={documentTitle}>
-	<LexiconLayout image={image} title={title}>
+	<LexiconLayout title={title}>
 		{
 			error == null ? (
 				Number(data.results.total) !== 0 ? (

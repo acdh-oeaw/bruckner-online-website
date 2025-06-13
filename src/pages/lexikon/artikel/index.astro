@@ -20,7 +20,7 @@ const { t } = await createI18n(locale);
 const page = await reader().collections.pages.readOrThrow("lexikon/artikel");
 
 const documentTitle = page.title;
-const { title, image } = page;
+const { title } = page;
 const { default: Content } = await processMdx(await page.content(), locale);
 
 const schema = v.object({
@@ -54,7 +54,7 @@ const { data, error } = await api();
 ---
 
 <PageLayout locale={locale} title={documentTitle}>
-	<LexiconLayout image={image} title={title}>
+	<LexiconLayout title={title}>
 		<div class="prose">
 			<Content />
 		</div>

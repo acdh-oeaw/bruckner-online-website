@@ -19,7 +19,7 @@ const { t } = await createI18n(locale);
 const page = await reader().collections.pages.readOrThrow("lexikon/werke");
 
 const documentTitle = page.title;
-const { title, image } = page;
+const { title } = page;
 
 async function api(): Promise<{ data: null; error: string } | { data: string; error: null }> {
 	const url = createUrl({
@@ -41,7 +41,7 @@ const { data, error } = await api();
 ---
 
 <PageLayout locale={locale} title={documentTitle}>
-	<LexiconLayout image={image} title={title}>
+	<LexiconLayout title={title}>
 		{error == null ? <div class="prose" set:html={data} /> : <div>{error}</div>}
 	</LexiconLayout>
 </PageLayout>
