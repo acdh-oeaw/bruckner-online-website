@@ -13,7 +13,7 @@ import {
 	SuperscriptIcon,
 	VideoIcon,
 } from "lucide-react";
-
+import { useObjectUrl } from "@/lib/content/use-object-url";
 import { createAssetPaths } from "@/lib/content/create-asset-paths";
 
 /** @see https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts */
@@ -186,12 +186,30 @@ function create(
 			ContentView(props) {
 				const { name, address, website, phone, email, logo } = props.value;
 
+				const src = useObjectUrl(logo);
+
 				return (
 					// @ts-expect-error
-					<NotEditable className="grid sm:grid-cols-[1fr_4fr]">
-						<img alt="" />
-						<div>
-							<strong>{name}</strong>
+					<NotEditable className="flex flex-col gap-y-2">
+						<div>{src ? <img alt="" src={src} /> : null}</div>
+						<div className="flex flex-col gap-y-0.5">
+							<strong className="font-semibold">{name}</strong>
+							{address ? <div>{address}</div> : null}
+							{phone ? (
+								<div>
+									Tel.: <a href={`tel:${phone}`}>{phone}</a>
+								</div>
+							) : null}
+							{email ? (
+								<div>
+									Email: <a href={`mailto:${email}`}>{email}</a>
+								</div>
+							) : null}
+							{website ? (
+								<div>
+									Website: <a href={website}>{website}</a>
+								</div>
+							) : null}
 						</div>
 					</NotEditable>
 				);
