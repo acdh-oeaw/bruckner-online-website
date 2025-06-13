@@ -1,9 +1,10 @@
 /* @jsxImportSource react */
 
 import { createUrl, pick } from "@acdh-oeaw/lib";
-import { fields } from "@keystatic/core";
+import { fields, NotEditable } from "@keystatic/core";
 import { block, mark, wrapper } from "@keystatic/core/content-components";
 import {
+	Building2Icon,
 	DownloadIcon,
 	ImageIcon,
 	PencilIcon,
@@ -150,6 +151,51 @@ function create(
 			icon: <SuperscriptIcon />,
 			className: "underline decoration-dotted align-super text-sm",
 			schema: {},
+		}),
+		Organisation: block({
+			label: "Organisation",
+			description: "Add organisation info with optional logo and link.",
+			icon: <Building2Icon />,
+			schema: {
+				name: fields.text({
+					label: "Name",
+					validation: { isRequired: true },
+				}),
+				address: fields.text({
+					label: "Address",
+					validation: { isRequired: false },
+					multiline: true,
+				}),
+				website: fields.url({
+					label: "Website",
+					validation: { isRequired: false },
+				}),
+				phone: fields.text({
+					label: "Phone",
+					validation: { isRequired: false },
+				}),
+				email: fields.url({
+					label: "Email",
+					validation: { isRequired: false },
+				}),
+				logo: fields.image({
+					label: "Logo",
+					validation: { isRequired: false },
+				}),
+			},
+			ContentView(props) {
+				const { name, address, website, phone, email, logo } = props.value;
+
+				return (
+					// @ts-expect-error
+					<NotEditable className="grid sm:grid-cols-[1fr_4fr]">
+						<img alt="" />
+						<div>
+							<strong>{name}</strong>
+						</div>
+					</NotEditable>
+				);
+			},
 		}),
 		TranskriptionsTool: block({
 			label: "TranskriptionsTool",

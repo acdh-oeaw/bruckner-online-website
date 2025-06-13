@@ -1,0 +1,57 @@
+---
+import slugify from "@sindresorhus/slugify";
+
+interface Props {
+	name: string;
+	address?: string;
+	email?: string;
+	website?: string;
+	phone?: string;
+	logo?: string;
+}
+
+const { address, email, logo, name, phone, website } = Astro.props;
+
+const id = slugify(name);
+---
+
+<div class="grid sm:grid-cols-[160px_1fr] gap-x-8 py-6 border-b">
+	<div class="not-prose my-2">
+		{
+			logo ? (
+				website ? (
+					<a aria-labelledby={id} class="grid object-contain w-full" href={website}>
+						<img alt="" src={logo} />
+					</a>
+				) : (
+					<img alt="" class="object-contain w-full" src={logo} />
+				)
+			) : null
+		}
+	</div>
+	<div class="flex flex-col gap-y-0.5">
+		<strong class="font-semibold" id={id}>{name}</strong>
+		{address ? <div>{address}</div> : null}
+		{
+			phone ? (
+				<div>
+					Tel.: <a href={`tel:${phone}`}>{phone}</a>
+				</div>
+			) : null
+		}
+		{
+			email ? (
+				<div>
+					Email: <a href={`mailto:${email}`}>{email}</a>
+				</div>
+			) : null
+		}
+		{
+			website ? (
+				<div>
+					Website: <a href={website}>{website}</a>
+				</div>
+			) : null
+		}
+	</div>
+</div>
