@@ -63,7 +63,7 @@ export default config({
 					// validation: { isRequired: true },
 				}),
 				"tables-striped": fields.checkbox({
-					label: "Stripped Table Layout",
+					label: "Striped Table Layout",
 					description:
 						"Activate if tables on this page should have different background colors for even and odd rows.",
 				}),
