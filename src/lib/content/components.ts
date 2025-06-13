@@ -10,6 +10,7 @@ import FootnoteContent from "@/components/content/footnote-content.astro";
 import FootnoteReference from "@/components/content/footnote-reference.astro";
 import FootnotesSection from "@/components/content/footnote-section.astro";
 import Img from "@/components/content/img.astro";
+import Organisation from "@/components/content/organisation.astro";
 import TranskriptionsTool from "@/components/content/transkriptions-tool.astro";
 import Video from "@/components/content/video.astro";
 
@@ -24,6 +25,7 @@ export function useMDXComponents(): MDXComponents {
 		FootnotesSection,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		img: Img as any,
+		Organisation,
 		TranskriptionsTool,
 		Video,
 	};
