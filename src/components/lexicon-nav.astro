@@ -1,4 +1,5 @@
 ---
+import MobileLexiconNavToggle from "@/components/navigation/mobile-lexicon-nav-toggle.astro";
 import NavMenuLink from "@/components/navigation/nav-menu-link.astro";
 import { defaultLocale, type Locale } from "@/config/i18n.config";
 import { createI18n } from "@/lib/i18n";
@@ -28,13 +29,17 @@ const links = [
 ];
 ---
 
-<nav class="mb-4 border-b pb-2" aria-label={t("LexiconNav.nav")}>
-	<ul class="-mx-4 flex gap-x-2 font-medium text-[#555]" role="list">
+<nav class="mb-4 pb-2" aria-label={t("LexiconNav.nav")}>
+	<ul class="-mx-4 hidden list-none gap-x-2 font-medium text-[#555] lg:flex" role="list">
 		{
 			links.map((link) => {
 				return (
 					<li>
-						<NavMenuLink href={link.href} reload={link.reload}>
+						<NavMenuLink
+							class="text-neutral-800 aria-[current]:text-brand-red"
+							href={link.href}
+							reload={link.reload}
+						>
 							{link.label}
 						</NavMenuLink>
 					</li>
@@ -42,4 +47,7 @@ const links = [
 			})
 		}
 	</ul>
+	<div class="ml-auto lg:hidden">
+		<MobileLexiconNavToggle />
+	</div>
 </nav>

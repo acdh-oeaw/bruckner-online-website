@@ -1,6 +1,7 @@
 ---
 import LexiconNav from "@/components/lexicon-nav.astro";
 import MainContent from "@/components/main-content.astro";
+import MobileLexiconNav from "@/components/navigation/mobile-lexicon-nav.astro";
 import PageCard from "@/components/page-card.astro";
 import PageSection from "@/components/page-section.astro";
 import PageTitle from "@/components/page-title.astro";
@@ -14,9 +15,17 @@ const { title, image } = Astro.props;
 ---
 
 <MainContent>
-	<PageSection variant="full-height">
-		<PageCard image={image}>
+	<div class="bg-white">
+		<div
+			class="mx-auto flex w-full max-w-screen-lg items-center justify-end pe-8 pt-4 text-md font-medium"
+		>
 			<LexiconNav />
+		</div>
+		<MobileLexiconNav />
+	</div>
+
+	<PageSection>
+		<PageCard image={image}>
 			<PageTitle>{title}</PageTitle>
 			<slot />
 		</PageCard>

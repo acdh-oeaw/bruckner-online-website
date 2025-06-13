@@ -88,6 +88,9 @@
 	"MobileNavToggle": {
 		"label": "Navigationsmenü öffnen"
 	},
+	"MobileLexiconNavToggle": {
+		"label": "Navigationsmenü für Lexikon öffnen"
+	},
 	"NotFoundPage": {
 		"meta": {
 			"title": "Seite nicht gefunden"

@@ -20,7 +20,7 @@ const { t } = await createI18n(locale);
 const page = await reader().collections.pages.readOrThrow("lexikon/sachbegriffe");
 
 const documentTitle = page.title;
-const { title, image } = page;
+const { title } = page;
 const { default: Content } = await processMdx(await page.content(), locale);
 
 const schema = v.object({
@@ -45,7 +45,7 @@ const results = (await request(url, { responseType: "json" })) as ArticleSearchR
 ---
 
 <PageLayout locale={locale} title={documentTitle}>
-	<LexiconLayout image={image} title={title}>
+	<LexiconLayout title={title}>
 		<div class="prose">
 			<Content />
 		</div>

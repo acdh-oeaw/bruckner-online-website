@@ -10,12 +10,12 @@ const locale = (Astro.currentLocale ?? defaultLocale) as Locale;
 const page = await reader().collections.pages.readOrThrow("lexikon/abkuerzungen");
 
 const documentTitle = page.title;
-const { title, image } = page;
+const { title } = page;
 const { default: Content } = await processMdx(await page.content(), locale);
 ---
 
 <PageLayout locale={locale} title={documentTitle}>
-	<LexiconLayout image={image} title={title}>
+	<LexiconLayout title={title}>
 		<div class="prose">
 			<Content />
 		</div>
