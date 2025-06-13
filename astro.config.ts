@@ -27,6 +27,7 @@ export default defineConfig({
 					"chevron-right",
 					"circle-pause",
 					"circle-play",
+					"ellipsis",
 					"menu",
 					"quote",
 					"search",

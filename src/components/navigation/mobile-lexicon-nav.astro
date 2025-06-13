@@ -1,0 +1,32 @@
+---
+import { mobileLexiconNavId } from "@/components/navigation/constants";
+import NavLink from "@/components/navigation/nav-link.astro";
+import { defaultLocale, type Locale } from "@/config/i18n.config";
+import { createI18n } from "@/lib/i18n";
+
+const { t } = await createI18n((Astro.currentLocale ?? defaultLocale) as Locale);
+
+const links = [
+	{ href: "/lexikon", label: t("LexiconNav.links.home") },
+	{ href: "/lexikon/projekt", label: t("LexiconNav.links.project") },
+	{ href: "/lexikon/autorinnen", label: t("LexiconNav.links.authors"), reload: true },
+	{ href: "/lexikon/literatur", label: t("LexiconNav.links.bibliography"), reload: true },
+	{ href: "/lexikon/abkuerzungen", label: t("LexiconNav.links.abbreviations") },
+];
+---
+
+<div id={mobileLexiconNavId} hidden class="px-4 pb-6 lg:hidden" data-mobile-lexicon-nav>
+	<ul class="grid gap-y-2 text-[#555]" role="list">
+		{
+			links.map((item) => {
+				return (
+					<li>
+						<NavLink class="transition hover:text-[#212529]" href={item.href}>
+							{item.label}
+						</NavLink>
+					</li>
+				);
+			})
+		}
+	</ul>
+</div>
