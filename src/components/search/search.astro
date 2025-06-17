@@ -1,0 +1,144 @@
+<div class="flex flex-col gap-3">
+	<div id="searchbox"></div>
+	<div id="year-range"></div>
+	<div id="sort-by"></div>
+	<div id="stats"></div>
+	<div id="hits"></div>
+</div>
+
+<script>
+	import instantsearch from "instantsearch.js";
+	import {
+		infiniteHits,
+		panel,
+		rangeInput,
+		searchBox,
+		sortBy,
+		stats,
+	} from "instantsearch.js/es/widgets";
+	import TypesenseInstantSearchAdapter from "typesense-instantsearch-adapter";
+
+	import { defaultLocale } from "@/config/i18n.config";
+	import { createI18n } from "@/lib/i18n";
+
+	const { t } = await createI18n(defaultLocale);
+
+	const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
+		server: {
+			apiKey: import.meta.env.PUBLIC_TYPESENSE_SEARCH_API_KEY,
+			nodes: [
+				{
+					host: import.meta.env.PUBLIC_TYPESENSE_HOST,
+					port: import.meta.env.PUBLIC_TYPESENSE_PORT,
+					protocol: import.meta.env.PUBLIC_TYPESENSE_PROTOCOL,
+				},
+			],
+		},
+		additionalSearchParameters: {
+			query_by: "author,reference",
+			sort_by: "year:asc",
+			per_page: 50,
+		},
+	});
+	const searchClient = typesenseInstantsearchAdapter.searchClient;
+	const indexName = String(import.meta.env.PUBLIC_TYPESENSE_COLLECTION_NAME);
+
+	const search = instantsearch({
+		searchClient,
+		indexName,
+	});
+
+	const yearsFilterPanel = panel({
+		cssClasses: {
+			header: "font-bold",
+		},
+		templates: {
+			header: t("BibliographySearch.filter-header"),
+		},
+	})(rangeInput);
+
+	const sortingPanel = panel({
+		cssClasses: {
+			header: "font-bold",
+		},
+		templates: {
+			header: t("BibliographySearch.sortby-header"),
+		},
+	})(sortBy);
+
+	search.addWidgets([
+		yearsFilterPanel({
+			container: "#year-range",
+			attribute: "year",
+			min: 0,
+			max: 2019,
+			cssClasses: {
+				form: "flex gap-2 items-center",
+				input: "rounded-sm border px-3 py-1",
+				submit:
+					"rounded-sm bg-neutral-900 px-6 py-2 text-sm font-medium text-white transition hover:bg-neutral-700",
+			},
+			templates: {
+				separatorText: "bis",
+				submitText: t("BibliographySearch.filter-label"),
+			},
+		}),
+		searchBox({
+			container: "#searchbox",
+			cssClasses: {
+				form: "flex gap-2",
+				input: "rounded-sm border px-3 py-1",
+				submit:
+					"rounded-sm bg-neutral-900 px-6 py-2 text-sm font-medium text-white transition hover:bg-neutral-700",
+			},
+			templates: {
+				submit() {
+					return `
+		${t("BibliographySearch.search")}`;
+				},
+			},
+		}),
+		infiniteHits({
+			container: "#hits",
+			cssClasses: {
+				list: ["list-none"],
+				loadMore: [
+					"rounded-sm bg-neutral-900 px-6 py-2 text-sm font-medium text-white transition hover:bg-neutral-700",
+				],
+				item: ["even:bg-neutral-100 flex gap-2"],
+			},
+			templates: {
+				item(hit) {
+					return `<span class="text-right min-w-[4ch]">${hit.__position}</span><span>${hit.reference}</span>`;
+				},
+				showMoreText() {
+					return t("BibliographySearch.show-more");
+				},
+			},
+		}),
+		sortingPanel({
+			container: "#sort-by",
+			cssClasses: {
+				select: "rounded-sm border px-3 py-1 bg-white",
+			},
+			items: [
+				{ label: t("BibliographySearch.author"), value: `${indexName}/sort/author:asc` },
+				{ label: t("BibliographySearch.year"), value: indexName },
+			],
+		}),
+		stats({
+			container: "#stats",
+			templates: {
+				text: (stats) => {
+					const recordsLabel =
+						stats.nbHits === 1
+							? t("BibliographySearch.result-single")
+							: t("BibliographySearch.result-multiple");
+					return `<span>${stats.nbHits} ${recordsLabel}</span>`;
+				},
+			},
+		}),
+	]);
+
+	search.start();
+</script>

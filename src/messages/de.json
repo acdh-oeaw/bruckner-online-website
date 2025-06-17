@@ -1,4 +1,15 @@
 {
+	"BibliographySearch": {
+		"search": "Suche",
+		"result-single": "Literaturzitat wurde gefunden",
+		"result-multiple": "Literaturzitate wurden gefunden",
+		"filter-header": "Editions-Jahre",
+		"filter-label": "Filtern",
+		"sortby-header": "Sortieren",
+		"show-more": "Mehr anzeigen",
+		"year": "Jahr",
+		"author": "Autor"
+	},
 	"ContactPage": {
 		"form": {
 			"email": "Email",
