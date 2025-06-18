@@ -1,9 +1,10 @@
 /* @jsxImportSource react */
 
 import { createUrl, pick } from "@acdh-oeaw/lib";
-import { fields } from "@keystatic/core";
+import { fields, NotEditable } from "@keystatic/core";
 import { block, mark, wrapper } from "@keystatic/core/content-components";
 import {
+	Building2Icon,
 	DownloadIcon,
 	ImageIcon,
 	PencilIcon,
@@ -14,6 +15,7 @@ import {
 } from "lucide-react";
 
 import { createAssetPaths } from "@/lib/content/create-asset-paths";
+import { useObjectUrl } from "@/lib/content/use-object-url";
 
 /** @see https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts */
 export const calloutKinds = [
@@ -150,6 +152,70 @@ function create(
 			icon: <SuperscriptIcon />,
 			className: "underline decoration-dotted align-super text-sm",
 			schema: {},
+		}),
+		Organisation: block({
+			label: "Organisation",
+			description: "Add organisation info with optional logo and link.",
+			icon: <Building2Icon />,
+			schema: {
+				name: fields.text({
+					label: "Name",
+					validation: { isRequired: true },
+				}),
+				address: fields.text({
+					label: "Address",
+					validation: { isRequired: false },
+					multiline: true,
+				}),
+				website: fields.url({
+					label: "Website",
+					validation: { isRequired: false },
+				}),
+				phone: fields.text({
+					label: "Phone",
+					validation: { isRequired: false },
+				}),
+				email: fields.url({
+					label: "Email",
+					validation: { isRequired: false },
+				}),
+				logo: fields.image({
+					label: "Logo",
+					validation: { isRequired: false },
+					...createAssetPaths(assetPath),
+				}),
+			},
+			ContentView(props) {
+				const { name, address, website, phone, email, logo } = props.value;
+
+				const src = useObjectUrl(logo);
+
+				return (
+					// @ts-expect-error Type mismatch for ReactNode between react 18 and 19 types.
+					<NotEditable className="flex flex-col gap-y-2">
+						<div>{src ? <img alt="" src={src} /> : null}</div>
+						<div className="flex flex-col gap-y-0.5">
+							<strong className="font-semibold">{name}</strong>
+							{address ? <div>{address}</div> : null}
+							{phone ? (
+								<div>
+									Tel.: <a href={`tel:${phone}`}>{phone}</a>
+								</div>
+							) : null}
+							{email ? (
+								<div>
+									Email: <a href={`mailto:${email}`}>{email}</a>
+								</div>
+							) : null}
+							{website ? (
+								<div>
+									Website: <a href={website}>{website}</a>
+								</div>
+							) : null}
+						</div>
+					</NotEditable>
+				);
+			},
 		}),
 		TranskriptionsTool: block({
 			label: "TranskriptionsTool",
