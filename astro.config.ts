@@ -22,6 +22,7 @@ export default defineConfig({
 			/** @see https://www.astroicon.dev/reference/configuration/#include */
 			include: {
 				lucide: [
+					"book",
 					"chevron-down",
 					"chevron-left",
 					"chevron-right",
