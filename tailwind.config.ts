@@ -8,6 +8,7 @@ const brandColors: Record<string, string> = {
 	red: "var(--color-brand-red)",
 	orange: "var(--color-brand-orange)",
 	blue: "var(--color-brand-blue)",
+	brown: "var(--color-brand-brown)",
 };
 
 const config: Config = {

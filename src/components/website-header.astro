@@ -19,6 +19,8 @@ import logo from "~/public/assets/images/bruckner-online-logo.png";
 const { t } = await createI18n(Astro.currentLocale as Locale | undefined);
 
 const home = t("WebsiteHeader.links.home");
+
+const { pathname } = Astro.url;
 ---
 
 <header class="border-b border-brand-red bg-white text-[#333]">
@@ -46,7 +48,12 @@ const home = t("WebsiteHeader.links.home");
 							case "page": {
 								return (
 									<li class="lg:border-t-4 lg:pt-4">
-										<NavMenuLink href={`/${item.value.reference}`}>{item.value.label}</NavMenuLink>
+										<NavMenuLink
+											href={`/${item.value.reference}`}
+											class={pathname.includes(item.value.reference) ? "text-brand-red" : undefined}
+										>
+											{item.value.label}
+										</NavMenuLink>
 									</li>
 								);
 							}

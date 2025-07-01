@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+
 import LexiconSearchForm from "@/components/lexicon-search-form.astro";
 import { defaultLocale, type Locale } from "@/config/i18n.config";
 import LexiconLayout from "@/layouts/lexicon-layout.astro";
@@ -26,52 +28,93 @@ const { default: Content } = await processMdx(await page.content(), locale);
 
 			<div class="grid gap-x-8 gap-y-6 grid-fluid-cols-80">
 				<a
-					class="grid content-start border bg-[url(/assets/images/lex_button_bg.jpg)] px-6 py-3 transition hover:bg-neutral-50"
+					class="grid grid-cols-[auto_1fr] content-start gap-x-4 border bg-[url(/assets/images/lex_button_bg.jpg)] px-6 py-3 transition hover:bg-neutral-50"
 					data-astro-reload
 					href="/lexikon/werke"
 				>
+					<div class="row-span-2 inline-flex items-center">
+						<Icon
+							aria-hidden="true"
+							class="size-6 shrink-0 transform text-brand-brown"
+							name="lucide:book"
+						/>
+					</div>
 					<div class="text-xl font-medium uppercase text-black">Bruckners Werke</div>
-					<span class="text-sm text-brand-red">in Einzeldarstellungen</span>
+					<span class="col-start-2 row-start-2 text-xs text-brand-brown"
+						>in Einzeldarstellungen</span
+					>
 				</a>
 				<a
-					class="grid content-start border bg-[url(/assets/images/lex_button_bg.jpg)] px-6 py-3 transition hover:bg-neutral-50"
+					class="grid grid-cols-[auto_1fr] content-start gap-x-4 border bg-[url(/assets/images/lex_button_bg.jpg)] px-6 py-3 transition hover:bg-neutral-50"
 					data-astro-reload
 					href="/lexikon/personen"
 				>
+					<div class="row-span-2 inline-flex items-center">
+						<Icon
+							aria-hidden="true"
+							class="size-6 shrink-0 transform text-brand-brown"
+							name="lucide:book"
+						/>
+					</div>
 					<div class="text-xl font-medium uppercase text-black">Personen</div>
-					<span class="text-sm text-brand-red">rund um Bruckner</span>
+					<span class="text-xs text-brand-brown">rund um Bruckner</span>
 				</a>
 				<a
-					class="grid content-start border bg-[url(/assets/images/lex_button_bg.jpg)] px-6 py-3 transition hover:bg-neutral-50"
+					class="grid grid-cols-[auto_1fr] content-start gap-x-4 border bg-[url(/assets/images/lex_button_bg.jpg)] px-6 py-3 transition hover:bg-neutral-50"
 					data-astro-reload
 					href="/lexikon/orte"
 				>
+					<div class="row-span-2 inline-flex items-center">
+						<Icon
+							aria-hidden="true"
+							class="size-6 shrink-0 transform text-brand-brown"
+							name="lucide:book"
+						/>
+					</div>
 					<div class="text-xl font-medium uppercase text-black">Orte</div>
-					<span class="text-sm text-brand-red">die mit Bruckner in Zusammenhang stehen</span>
+					<span class="text-xs text-brand-brown">die mit Bruckner in Zusammenhang stehen</span>
 				</a>
 				<a
-					class="grid content-start border bg-[url(/assets/images/lex_button_bg.jpg)] px-6 py-3 transition hover:bg-neutral-50"
+					class="grid grid-cols-[auto_1fr] content-start gap-x-4 border bg-[url(/assets/images/lex_button_bg.jpg)] px-6 py-3 transition hover:bg-neutral-50"
 					data-astro-reload
 					href="/lexikon/sachbegriffe"
-				>
+					><div class="row-span-2 inline-flex items-center">
+						<Icon
+							aria-hidden="true"
+							class="size-6 shrink-0 transform text-brand-brown"
+							name="lucide:book"
+						/>
+					</div>
 					<div class="text-xl font-medium uppercase text-black">Sachbegriffe aller Art</div>
-					<span class="text-sm text-brand-red">von "ABCD" bis "Zyklus"</span>
+					<span class="text-xs text-brand-brown">von "ABCD" bis "Zyklus"</span>
 				</a>
 				<a
-					class="grid content-start border bg-[url(/assets/images/lex_button_bg.jpg)] px-6 py-3 transition hover:bg-neutral-50"
+					class="grid grid-cols-[auto_1fr] content-start gap-x-4 border bg-[url(/assets/images/lex_button_bg.jpg)] px-6 py-3 transition hover:bg-neutral-50"
 					data-astro-reload
 					href="/lexikon/artikel"
-				>
+					><div class="row-span-2 inline-flex items-center">
+						<Icon
+							aria-hidden="true"
+							class="size-6 shrink-0 transform text-brand-brown"
+							name="lucide:book"
+						/>
+					</div>
 					<div class="text-xl font-medium uppercase text-black">Alle ABLO-Artikel</div>
-					<span class="text-sm text-brand-red">in alphabetischer Auflistung</span>
+					<span class="text-xs text-brand-brown">in alphabetischer Auflistung</span>
 				</a>
 				<a
-					class="grid content-start border bg-[url(/assets/images/lex_button_bg.jpg)] px-6 py-3 transition hover:bg-neutral-50"
+					class="grid grid-cols-[auto_1fr] content-start gap-x-4 border bg-[url(/assets/images/lex_button_bg.jpg)] px-6 py-3 transition hover:bg-neutral-50"
 					href="https://musiklexikon.ac.at/0xc1aa5576_0x0001f96d"
 					target="_blank"
-				>
+					><div class="row-span-2 inline-flex items-center">
+						<Icon
+							aria-hidden="true"
+							class="size-6 shrink-0 transform text-brand-brown"
+							name="lucide:book"
+						/>
+					</div>
 					<div class="text-xl font-medium uppercase text-black">Bruckner im OeML</div>
-					<span class="text-sm text-brand-red">Osterreichisches Musiklexikon</span>
+					<span class="text-xs text-brand-brown">Osterreichisches Musiklexikon</span>
 				</a>
 			</div>
 		</div>
