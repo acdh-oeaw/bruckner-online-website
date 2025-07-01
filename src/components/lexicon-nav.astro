@@ -4,7 +4,13 @@ import NavMenuLink from "@/components/navigation/nav-menu-link.astro";
 import { defaultLocale, type Locale } from "@/config/i18n.config";
 import { createI18n } from "@/lib/i18n";
 
+interface Props {
+	currentPage?: string;
+}
+
 const { t } = await createI18n((Astro.currentLocale ?? defaultLocale) as Locale);
+
+const { currentPage } = Astro.props;
 
 const links = [
 	{ href: "/lexikon", label: t("LexiconNav.links.home") },
@@ -37,6 +43,7 @@ const links = [
 					<li>
 						<NavMenuLink
 							class="text-neutral-800 aria-[current]:text-brand-red"
+							currentPage={currentPage}
 							href={link.href}
 							reload={link.reload}
 						>

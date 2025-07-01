@@ -18,7 +18,7 @@ const { default: Content } = await processMdx(await page.content(), locale);
 ---
 
 <PageLayout locale={locale} title={documentTitle}>
-	<LexiconLayout image={image} title={title}>
+	<LexiconLayout image={image} title={title} currentPage={"/lexikon"}>
 		<div class="prose">
 			<Content />
 		</div>

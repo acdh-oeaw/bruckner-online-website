@@ -9,9 +9,10 @@ import PageTitle from "@/components/page-title.astro";
 interface Props {
 	title: string;
 	image?: string | null;
+	currentPage?: string;
 }
 
-const { title, image } = Astro.props;
+const { currentPage, title, image } = Astro.props;
 ---
 
 <MainContent>
@@ -19,7 +20,7 @@ const { title, image } = Astro.props;
 		<div
 			class="mx-auto flex w-full max-w-screen-lg items-center justify-end pe-8 pt-4 text-md font-medium"
 		>
-			<LexiconNav />
+			<LexiconNav currentPage={currentPage} />
 		</div>
 		<MobileLexiconNav />
 	</div>
