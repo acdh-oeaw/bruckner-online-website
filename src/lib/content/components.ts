@@ -9,6 +9,7 @@ import Figure from "@/components/content/figure.astro";
 import FootnoteContent from "@/components/content/footnote-content.astro";
 import FootnoteReference from "@/components/content/footnote-reference.astro";
 import FootnotesSection from "@/components/content/footnote-section.astro";
+import IconLink from "@/components/content/icon-link.astro";
 import Img from "@/components/content/img.astro";
 import Organisation from "@/components/content/organisation.astro";
 import TranskriptionsTool from "@/components/content/transkriptions-tool.astro";
@@ -23,6 +24,7 @@ export function useMDXComponents(): MDXComponents {
 		FootnoteContent,
 		FootnoteReference,
 		FootnotesSection,
+		IconLink,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		img: Img as any,
 		Organisation,
