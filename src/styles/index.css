@@ -24,3 +24,8 @@
 .ais-InfiniteHits-loadMore:disabled {
 	display: none;
 }
+
+/* stylelint-disable-next-line selector-class-pattern */
+#hits:not(:has(li)) .ais-InfiniteHits-loadMore {
+	display: none;
+}
