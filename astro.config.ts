@@ -23,6 +23,7 @@ export default defineConfig({
 			include: {
 				lucide: [
 					"book",
+					"camera",
 					"chevron-down",
 					"chevron-left",
 					"chevron-right",
