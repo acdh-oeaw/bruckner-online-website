@@ -1,6 +1,7 @@
 {
 	"BibliographySearch": {
 		"search": "Suche",
+		"no-results": "Keine Ergebnisse gefunden",
 		"result-single": "Literaturzitat wurde gefunden",
 		"result-multiple": "Literaturzitate wurden gefunden",
 		"filter-header": "Editions-Jahre",

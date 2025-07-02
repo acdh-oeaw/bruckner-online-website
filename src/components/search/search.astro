@@ -108,12 +108,18 @@
 				item: ["even:bg-neutral-100 flex gap-2"],
 			},
 			templates: {
+				empty(_results, { html }) {
+					return html`<p>${t("BibliographySearch.no-results")}</p>`;
+				},
 				item(hit) {
 					return `<span class="text-right min-w-[4ch]">${hit.__position}</span><span>${hit.reference}</span>`;
 				},
 				showMoreText() {
 					return t("BibliographySearch.show-more");
 				},
+			},
+			transformItems(items, { results }) {
+				return results?.query && results.query.trim() !== "*" ? items : [];
 			},
 		}),
 		sortingPanel({
@@ -130,15 +136,24 @@
 			container: "#stats",
 			templates: {
 				text: (stats) => {
-					const recordsLabel =
-						stats.nbHits === 1
-							? t("BibliographySearch.result-single")
-							: t("BibliographySearch.result-multiple");
-					return `<span>${stats.nbHits} ${recordsLabel}</span>`;
+					let recordsLabel;
+					if (stats.hasManyResults) {
+						recordsLabel = t("BibliographySearch.result-multiple");
+					} else if (stats.hasOneResult) {
+						recordsLabel = t("BibliographySearch.result-single");
+					}
+					return `<span class="${stats.query === "*" || stats.nbHits === 0 ? "hidden" : ""}">${stats.nbHits} ${recordsLabel}</span>`;
 				},
 			},
 		}),
 	]);
+
+	search.on("render", () => {
+		const query = search?.helper?.state.query;
+		if (!query) {
+			document.getElementsByClassName("ais-InfiniteHits-loadMore")[0]?.setAttribute("disabled", "");
+		}
+	});
 
 	search.start();
 </script>
