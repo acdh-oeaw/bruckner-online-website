@@ -19,3 +19,8 @@
 .tables-striped tbody td {
 	@apply ps-2;
 }
+
+/* stylelint-disable-next-line selector-class-pattern */
+.ais-InfiniteHits-loadMore:disabled {
+	display: none;
+}
