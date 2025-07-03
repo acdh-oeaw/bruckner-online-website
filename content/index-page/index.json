@@ -2,11 +2,11 @@
   "hero": {
     "slides": [
       {
-        "title": "Jubiläumsjahr 2024",
-        "summary": "Veranstaltungen zum 200. Geburtstag Anton Bruckners",
+        "title": "Werkverzeichnis",
+        "summary": "Gedrucktes Werkverzeichnis Anton Bruckner",
         "alignment": "right",
-        "image": "/assets/content/index-page/hero/slides/0/image.jpg",
-        "page": "lexikon"
+        "image": "/assets/content/pages/werkverzeichnis/gedrucktes-werkverzeichnis/image.png",
+        "page": "werkverzeichnis/gedrucktes-werkverzeichnis"
       },
       {
         "title": "Digitales Werkverzeichnis Anton Bruckner",
