@@ -15,7 +15,7 @@ const alphabet = alpha.map((x) => {
 });
 ---
 
-<div class="flex gap-1">
+<div class="flex flex-wrap">
 	{
 		alphabet.map((letter) => {
 			const isCurrent = letter === current;
@@ -24,8 +24,8 @@ const alphabet = alpha.map((x) => {
 				<a
 					aria-current={isCurrent ? "page" : undefined}
 					class:list={[
-						"block rounded-md p-1 transition hover:underline",
-						isCurrent ? "underline" : undefined,
+						"border rounded w-8 height-8 inline-flex items-center justify-center transition hover:bg-brand-red hover:text-white",
+						isCurrent ? "bg-brand-red text-white" : undefined,
 					]}
 					data-astro-reload
 					href={`?${String(createUrlSearchParams({ letter, start: 1 }))}`}

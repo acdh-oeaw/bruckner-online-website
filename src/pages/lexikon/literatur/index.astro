@@ -65,20 +65,13 @@ const { data, error } = await api();
 			error == null ? (
 				Number(data.results.total) !== 0 ? (
 					<div class="grid gap-y-4">
-						<h2>{t("SearchResults.search-results", { count: data.results.total })}</h2>
-						<ul class="grid gap-y-4" role="list">
+						<ol class="grid" role="list">
 							{ensureArray(data.results.item).map((item) => {
 								const { full } = item;
 
-								return (
-									<li>
-										<article class="grid gap-y-2">
-											<h3>{full.bibl["#text"]}</h3>
-										</article>
-									</li>
-								);
+								return <li>{full.bibl["#text"]}</li>;
 							})}
-						</ul>
+						</ol>
 					</div>
 				) : (
 					<div>{t("SearchResults.nothing-found")}</div>
