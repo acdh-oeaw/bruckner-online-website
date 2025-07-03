@@ -1,6 +1,7 @@
 ---
 import { assert, createUrl, log, request } from "@acdh-oeaw/lib";
 
+import Citation from "@/components/citation.astro";
 import { defaultLocale, type Locale } from "@/config/i18n.config";
 import LexiconLayout from "@/layouts/lexicon-layout.astro";
 import PageLayout from "@/layouts/page-layout.astro";
@@ -42,6 +43,15 @@ const { data, error } = await api();
 
 <PageLayout locale={locale} title={documentTitle}>
 	<LexiconLayout title={title}>
-		{error == null ? <div class="prose" set:html={data} /> : <div>{error}</div>}
+		{
+			error == null ? (
+				<>
+					<div class="prose" set:html={data} />
+					<Citation id={id} />
+				</>
+			) : (
+				<div>{error}</div>
+			)
+		}
 	</LexiconLayout>
 </PageLayout>
