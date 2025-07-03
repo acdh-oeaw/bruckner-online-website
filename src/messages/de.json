@@ -1,4 +1,7 @@
 {
+	"ArticlesByAuthor": {
+		"title": "Anton Bruckner-Lexikon online: Artikel von {author}"
+	},
 	"BibliographySearch": {
 		"search": "Suche",
 		"no-results": "Keine Ergebnisse gefunden",
