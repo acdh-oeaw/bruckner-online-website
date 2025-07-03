@@ -102,6 +102,13 @@
           {
             "discriminant": "page",
             "value": {
+              "label": "Vorwort",
+              "reference": "werkverzeichnis/vorwort"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
               "label": "Werkverzeichnis",
               "reference": "werkverzeichnis/wab"
             }
