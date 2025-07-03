@@ -20,9 +20,6 @@ const { t } = await createI18n(locale);
 
 const page = await reader().collections.pages.readOrThrow("lexikon/autorinnen");
 
-const documentTitle = page.title;
-const { title } = page;
-
 const schema = v.object({
 	start: v.fallback(v.optional(v.pipe(v.unknown(), v.transform(Number), v.number()), 1), 1),
 });
@@ -54,32 +51,29 @@ async function api(): Promise<
 }
 
 const { data, error } = await api();
+
+const title = t("ArticlesByAuthor.title", { author: id }) ?? page.title;
 ---
 
-<PageLayout locale={locale} title={documentTitle}>
+<PageLayout locale={locale} title={title}>
 	<LexiconLayout title={title}>
 		{
 			error == null ? (
 				Number(data.results.total) !== 0 ? (
 					<div class="grid gap-y-4">
-						<h2>{t("SearchResults.search-results", { count: data.results.total })}</h2>
-						<ul class="grid gap-y-4" role="list">
+						<ol class="grid" role="list">
 							{ensureArray(data.results.article).map((article) => {
 								const { id, title } = article;
 
 								return (
 									<li>
-										<article class="grid gap-y-2">
-											<h3>
-												<a class="underline" href={`${pathnames[article.category]}${id}`}>
-													{title}
-												</a>
-											</h3>
-										</article>
+										<a class="underline" href={`${pathnames[article.category]}${id}`}>
+											{title}
+										</a>
 									</li>
 								);
 							})}
-						</ul>
+						</ol>
 					</div>
 				) : (
 					<div>{t("SearchResults.nothing-found")}</div>
