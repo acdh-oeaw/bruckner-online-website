@@ -58,7 +58,7 @@ const results = (await request(url, { responseType: "json" })) as ArticleSearchR
 
 						return (
 							<li>
-								<a class="underline" href={`${pathnames[article.category]}${id}`}>
+								<a class="underline" href={`${pathnames["Artikel"]}${id}`}>
 									{title}
 								</a>
 							</li>
