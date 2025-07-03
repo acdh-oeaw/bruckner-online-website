@@ -23,6 +23,9 @@
 			"unknown-error": "Konnte Nachricht nicht senden."
 		}
 	},
+	"Citation": {
+		"link-label": "Zitierlink"
+	},
 	"FootnoteContent": {
 		"back": "Zurück zu Referenz {count}"
 	},

@@ -34,3 +34,8 @@
 #hits:not(:has(li)) .ais-InfiniteHits-loadMore {
 	display: none;
 }
+
+/* article pages */
+.row:has(#medienleiste) {
+	@apply grid grid-cols-1 gap-x-8 md:grid-cols-[4fr_1fr];
+}

@@ -7,7 +7,7 @@ export function onRequest(context: APIContext, next: MiddlewareNext) {
 		return redirect(`/werkverzeichnis/wab?WAB=${url.pathname.replace("/", "")}`);
 	}
 
-	if (/ABLO_[a-z\d]+$/.test(url.pathname)) {
+	if (url.pathname.includes("ABLO_")) {
 		return redirect(`/lexikon/artikel/${url.pathname.replace("/ABLO_", "")}`);
 	}
 
