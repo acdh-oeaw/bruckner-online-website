@@ -73,6 +73,42 @@ import navigation from "~/content/navigation.json";
 													);
 												}
 
+												case "section": {
+													return link.value.links.map((link) => {
+														switch (link.discriminant) {
+															case "link": {
+																return (
+																	<li>
+																		<NavLink
+																			class="transition hover:text-[#212529]"
+																			href={link.value.href}
+																		>
+																			{link.value.label}
+																		</NavLink>
+																	</li>
+																);
+															}
+
+															case "page": {
+																return (
+																	<li>
+																		<NavLink
+																			class="transition hover:text-[#212529]"
+																			href={`/${link.value.reference}`}
+																		>
+																			{link.value.label}
+																		</NavLink>
+																	</li>
+																);
+															}
+
+															default: {
+																return null;
+															}
+														}
+													});
+												}
+
 												default: {
 													return null;
 												}
