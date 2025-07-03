@@ -71,15 +71,15 @@ const { data, error } = await api();
 				Number(data.results.total) !== 0 ? (
 					<div class="grid gap-y-4">
 						<h2>{t("SearchResults.search-results", { count: data.results.total })}</h2>
-						<ul class="grid gap-y-4" role="list">
+						<ol class="grid" role="list">
 							{ensureArray(data.results.article).map((article) => {
-								const { id, title, categories, kwic } = article;
+								const { id, title, kwic } = article;
 
 								return (
 									<li>
-										<article class="grid gap-y-2">
-											<h3>
-												<a class="underline" href={`${pathnames[categories.term]}${id}`}>
+										<article class="grid gap-y-1">
+											<h3 class="my-1 !text-md">
+												<a class="underline" href={`${pathnames["Artikel"]}${id}`}>
 													{title}
 												</a>
 											</h3>
@@ -98,7 +98,7 @@ const { data, error } = await api();
 									</li>
 								);
 							})}
-						</ul>
+						</ol>
 					</div>
 				) : (
 					<div>{t("SearchResults.nothing-found")}</div>
