@@ -1,0 +1,33 @@
+---
+interface Props {
+	id: string;
+}
+
+const { id } = Astro.props;
+
+const manifestId = id ?? "WAB001";
+---
+
+<mirador-viewer id="mirador-viewer" data-imageid={manifestId} style="height: 600px;"
+></mirador-viewer>
+
+<script>
+	// @ts-expect-error No type definitions available for mirador
+	import Mirador from "mirador";
+
+	class MiradorViewer extends HTMLElement {
+		connectedCallback() {
+			Mirador.viewer({
+				id: "mirador-viewer",
+				showAddFromURLBox: false,
+				windows: [
+					{
+						loadedManifest: `https://iiifpresentation.acdh.oeaw.ac.at/bruckner/drucke/${this.dataset.imageid}/manifest`,
+					},
+				],
+			});
+		}
+	}
+
+	customElements.define("mirador-viewer", MiradorViewer);
+</script>
