@@ -2,13 +2,6 @@
   "hero": {
     "slides": [
       {
-        "title": "Werkverzeichnis",
-        "summary": "Gedrucktes Werkverzeichnis Anton Bruckner",
-        "alignment": "right",
-        "image": "/assets/content/pages/werkverzeichnis/gedrucktes-werkverzeichnis/image.png",
-        "page": "werkverzeichnis/gedrucktes-werkverzeichnis"
-      },
-      {
         "title": "Digitales Werkverzeichnis Anton Bruckner",
         "summary": "Datenbank mit Informationen zu Werken Anton Bruckners und zu weiteren Quellen aus dem musikalischen Nachlass",
         "alignment": "left",
