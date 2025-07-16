@@ -17,7 +17,7 @@ const { title, image } = Astro.props;
 	<PageSection variant="full-height">
 		<PageCard image={image}>
 			<KopistenNav />
-			<PageTitle>{title}</PageTitle>
+			<PageTitle class="sr-only">{title}</PageTitle>
 			<slot />
 		</PageCard>
 	</PageSection>

@@ -50,5 +50,8 @@
 	"[mdx]": {
 		"editor.formatOnSave": false,
 		"editor.wordWrap": "on"
+	},
+	"[xml]": {
+		"files.insertFinalNewline": false
 	}
 }

@@ -70,7 +70,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
+      - name: Install Saxon, ant
+        run: |
+          apt-get update && apt-get install openjdk-11-jre-headless ant -y --no-install-recommend
+          ./src/scripts/shellscripts/dl_saxon.sh
+      - name: Fetch Edition Data
+        run: |
+          ./src/scripts/shellscripts/fetch_data.sh
+      - name: Build the site
+        run: |
+          ant -f ./src/scripts/ant/build.xml
       - name: Ensure astro build artefacts folder exists
         run: mkdir -p node_modules/.astro
 

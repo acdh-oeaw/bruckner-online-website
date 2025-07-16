@@ -1,0 +1,34 @@
+---
+import { readdir, readFile } from "node:fs/promises";
+
+import { defaultLocale, type Locale } from "@/config/i18n.config";
+import KopistenLayout from "@/layouts/kopisten-layout.astro";
+import PageLayout from "@/layouts/page-layout.astro";
+
+const locale = (Astro.currentLocale ?? defaultLocale) as Locale;
+
+export async function getStaticPaths() {
+	const entries = await readdir("src/edition", { withFileTypes: true });
+	return entries
+		.filter((entry) => {
+			return entry.isFile() && entry.name.endsWith(".html");
+		})
+		.map((entry) => {
+			return {
+				params: { slug: entry.name.replace(/\.html$/, "") },
+				props: {
+					html: readFile(`src/edition/${entry.name}`, "utf-8"),
+					name: entry.name,
+				},
+			};
+		});
+}
+
+const { html, name } = Astro.props;
+---
+
+<PageLayout locale={locale} title={name}>
+	<KopistenLayout title={name}>
+		<div set:html={html} />
+	</KopistenLayout>
+</PageLayout>
