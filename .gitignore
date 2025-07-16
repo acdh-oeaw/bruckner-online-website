@@ -33,3 +33,11 @@ dist/
 /playwright/.cache/
 /playwright-report/
 /test-results/
+
+#saxon
+saxon/
+
+#kopisten-edition
+src/edition/
+src/data/editions/
+
