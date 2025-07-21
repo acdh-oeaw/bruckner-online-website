@@ -73,6 +73,10 @@ export default defineConfig({
 			destination: "/keystatic",
 			status: 307,
 		},
+		"/ablo": {
+			destination: "/lexikon",
+			status: 307,
+		},
 	},
 	scopedStyleStrategy: "where",
 	security: {
