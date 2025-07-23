@@ -26,22 +26,22 @@ const links: Array<
 			{ kind: "link", href: "/forschung/kopisten", label: t("KopistenNav.links.about") },
 			{
 				kind: "link",
-				href: "/forschung/kopisten/introduction",
+				href: "/forschung/kopisten/einleitung",
 				label: t("KopistenNav.links.introduction"),
 			},
 			{
 				kind: "link",
-				href: "/forschung/kopisten/userguide",
+				href: "/forschung/kopisten/benutzerhinweise",
 				label: t("KopistenNav.links.userguide"),
 			},
 			{
 				kind: "link",
-				href: "/forschung/kopisten/methodology",
+				href: "/forschung/kopisten/methodik",
 				label: t("KopistenNav.links.methodology"),
 			},
 			{
 				kind: "link",
-				href: "/forschung/kopisten/authors-note",
+				href: "/forschung/kopisten/nachtrag",
 				label: t("KopistenNav.links.authors-note"),
 			},
 		],
@@ -78,7 +78,7 @@ const links: Array<
 ];
 ---
 
-<Nav class="mb-4 border-b pb-2" label={t("KopistenNav.nav")}>
+<Nav class="mb-4 pb-2" label={t("KopistenNav.nav")}>
 	<ul class="-mx-4 flex gap-x-2 font-medium text-[#555]" role="list">
 		{
 			links.map((link) => {

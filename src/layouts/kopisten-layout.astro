@@ -1,24 +1,30 @@
 ---
+import { KopistenLanguageToggle } from "@/components/kopisten-language-toggle";
 import KopistenNav from "@/components/kopisten-nav.astro";
 import MainContent from "@/components/main-content.astro";
-import PageCard from "@/components/page-card.astro";
 import PageSection from "@/components/page-section.astro";
-import PageTitle from "@/components/page-title.astro";
 
 interface Props {
 	title: string;
 	image?: string | null;
+	languageToggle?: boolean;
 }
 
-const { title, image } = Astro.props;
+const { languageToggle = false } = Astro.props;
 ---
 
 <MainContent>
-	<PageSection variant="full-height">
-		<PageCard image={image}>
+	<div class="bg-white">
+		<div
+			class="mx-auto flex w-full max-w-screen-lg items-center justify-end pe-8 pt-4 text-md font-medium"
+		>
 			<KopistenNav />
-			<PageTitle class="sr-only">{title}</PageTitle>
+		</div>
+	</div>
+	<PageSection>
+		{languageToggle && <KopistenLanguageToggle languages={["de", "en"]} client:only="solid" />}
+		<div class="prose my-2 bg-white shadow-lg shadow-neutral-500">
 			<slot />
-		</PageCard>
+		</div>
 	</PageSection>
 </MainContent>
