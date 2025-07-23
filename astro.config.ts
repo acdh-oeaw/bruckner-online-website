@@ -2,6 +2,7 @@ import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+import solidJs from "@astrojs/solid-js";
 import keystatic from "@keystatic/astro";
 import { defineConfig } from "astro/config";
 import icon from "astro-icon";
@@ -56,6 +57,9 @@ export default defineConfig({
 		mdx(),
 		react(),
 		sitemap(),
+		solidJs({
+			exclude: ["**/content/**", "**/keystatic/**"],
+		}),
 	],
 	// // @ts-expect-error Astro types are incomplete.
 	// markdown: {
