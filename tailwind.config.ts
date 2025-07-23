@@ -19,6 +19,7 @@ const config: Config = {
 		"./src/styles/**/*.css",
 	],
 	presets: [preset],
+	safelist: ["mb-0"],
 	theme: {
 		extend: {
 			colors: {

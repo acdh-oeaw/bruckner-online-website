@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project basedir="../.." name="tei2html">
+	<property name="index" value="${basedir}/data/meta/about.xml"/>
 	<property name="target" value="${basedir}/edition"/>
 	<mkdir dir="${target}"/>
   <delete>
@@ -11,6 +12,26 @@
 	<delete>
 			<fileset dir="${target}" includes="*.json"/>
 	</delete>
+	<xslt in="${index}" out="${target}/meta/about.html" style="${basedir}/scripts/xslt/meta.xsl">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/../saxon/saxon9he.jar"/>
+  </xslt>
+	<xslt in="${basedir}/data/meta/01-introduction.xml" out="${target}/meta/introduction.html" style="${basedir}/scripts/xslt/meta.xsl">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/../saxon/saxon9he.jar"/>
+  </xslt>
+	<xslt in="${basedir}/data/meta/02-userguide.xml" out="${target}/meta/userguide.html" style="${basedir}/scripts/xslt/meta.xsl">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/../saxon/saxon9he.jar"/>
+  </xslt>
+	<xslt in="${basedir}/data/meta/03-methodology.xml" out="${target}/meta/methodology.html" style="${basedir}/scripts/xslt/meta.xsl">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/../saxon/saxon9he.jar"/>
+  </xslt>
+	<xslt in="${basedir}/data/meta/04-authors_note.xml" out="${target}/meta/authors_note.html" style="${basedir}/scripts/xslt/meta.xsl">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/../saxon/saxon9he.jar"/>
+  </xslt>
 	<xslt style="${basedir}/scripts/xslt/editions.xsl"  basedir="${basedir}/data/editions" destdir="${target}" includes="*.xml">
 			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
 			<classpath location="${basedir}/../saxon/saxon9he.jar"/>
