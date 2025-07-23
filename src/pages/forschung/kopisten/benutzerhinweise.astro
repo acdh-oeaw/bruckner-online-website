@@ -10,11 +10,14 @@ const locale = (Astro.currentLocale ?? defaultLocale) as Locale;
 
 const { t } = await createI18n((Astro.currentLocale ?? defaultLocale) as Locale);
 
-const html = readFileSync(`src/edition/meta/about.html`, "utf-8");
+const html = readFileSync(`src/edition/meta/userguide.html`, "utf-8");
 ---
 
-<PageLayout locale={locale} title={t("KopistenMeta.title")}>
-	<KopistenLayout title={""}>
+<PageLayout
+	locale={locale}
+	title={`${t("KopistenMeta.title")}: ${t("KopistenNav.links.userguide")}`}
+>
+	<KopistenLayout title="" languageToggle={true}>
 		<Fragment set:html={html} />
 	</KopistenLayout>
 </PageLayout>
