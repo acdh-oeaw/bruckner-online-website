@@ -39,3 +39,9 @@
 .row:has(#medienleiste) {
 	@apply grid grid-cols-1 gap-x-8 md:grid-cols-[4fr_1fr];
 }
+
+/* datatables */
+
+.datatable-sorter {
+	@apply text-left;
+}
