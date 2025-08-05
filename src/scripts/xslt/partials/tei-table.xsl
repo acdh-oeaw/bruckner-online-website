@@ -17,21 +17,21 @@
         <div class="row justify-content-center">
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="bg-neutral-100">
                         <xsl:if test="./tei:head">
-                            <h2>
+                            <h1 class="font-semibold p-4">
                                 <xsl:value-of select="./tei:head[1]"/>
-                            </h2>
-                            <h4>
+                            </h1>
+                            <!--<h4>
                                 <xsl:value-of select="./tei:head[2]"/>
-                            </h4>
+                            </h4>-->
                         </xsl:if>
                     </div>
                     <div class="card-body">
                         <xsl:choose>
                             <xsl:when test="./tei:row[@role='label' and @xml:lang='de']">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-hover" id="{$table-id}" style="width:auto">
+                                    <table class="table table-striped table-hover" id="{$table-id}">
                                         <thead>
                                         <xsl:for-each select="./tei:row[@role='label' and @xml:lang='de']">
                                             <tr>
@@ -212,7 +212,21 @@
                                 </xsl:if>
                             </xsl:when>
                             <xsl:when test="not(@xml:lang)">
-                                <td class="{@role}"><xsl:apply-templates/></td>
+                                <td class="{@role}">
+																<xsl:if test="@role='Ort'">
+																<xsl:attribute name="data-contenttype" select="'place'"/>
+																	<xsl:variable name="placeref" select="substring(tei:rs/@ref,2)" />
+																	<xsl:variable name="place" select="root(.)//tei:place[@xml:id=$placeref]"/>
+																	<xsl:variable name="location" select="tokenize($place/tei:location/tei:geo/text())"/>
+																 <xsl:attribute name="data-lat">
+                                    <xsl:value-of select="$location[1]"/>
+                                  </xsl:attribute>
+                                  <xsl:attribute name="data-lng">
+                                        <xsl:value-of select="$location[2]"/>
+                                  </xsl:attribute>
+																</xsl:if>
+																	<xsl:apply-templates/>
+																</td>
                                 <xsl:if test="child::tei:date/@from and not(ancestor::tei:div[@xml:id])">
                                     <td>
                                         <xsl:value-of select="./tei:date/@from"/>

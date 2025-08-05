@@ -36,6 +36,30 @@
 			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
 			<classpath location="${basedir}/../saxon/saxon9he.jar"/>
 	</xslt>
+		<xslt in="${index}" out="${target}/toc.html" style="${basedir}/scripts/xslt/toc.xsl">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/../saxon/saxon9he.jar"/>
+  </xslt>
+	    <xslt in="${index}" out="${basedir}/data/meta/Tabelle_1.xml" style="${basedir}/scripts/xslt/Tabelle_primarySources.xsl">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/../saxon/saxon9he.jar"/>
+    </xslt>
+    <xslt in="${index}" out="${basedir}/data/meta/Tabelle_2.xml" style="${basedir}/scripts/xslt/Tabelle_secundarySources.xsl">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/../saxon/saxon9he.jar"/>
+    </xslt>
+    <xslt in="${index}" out="${basedir}/data/meta/Tabelle_3.xml" style="${basedir}/scripts/xslt/Tabelle_residence.xsl">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/../saxon/saxon9he.jar"/>
+    </xslt>
+    <xslt in="${index}" out="${basedir}/data/meta/Tabelle_4.xml" style="${basedir}/scripts/xslt/Tabelle_floruit.xsl">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/../saxon/saxon9he.jar"/>
+    </xslt>
+	<xslt style="${basedir}/scripts/xslt/tabellen.xsl"  basedir="${basedir}/data/meta" destdir="${target}/meta" includes="Tabelle_*.xml">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <classpath location="${basedir}/../saxon/saxon9he.jar"/>
+    </xslt>
 	<replace dir="${target}" value="">
 		<include name="*.html"/>
 		<replacetoken> xmlns=""</replacetoken>

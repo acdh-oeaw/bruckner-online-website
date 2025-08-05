@@ -40,4 +40,5 @@ saxon/
 #kopisten-edition
 src/edition/
 src/data/editions/
+src/data/meta/
 

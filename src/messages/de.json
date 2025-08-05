@@ -79,6 +79,11 @@
 			"compare": "Handschriftenvergleich"
 		}
 	},
+	"KopistenTable": {
+		"labels": {
+			"search": "Suchen"
+		}
+	},
 	"LexiconNav": {
 		"nav": "Lexikon",
 		"links": {
