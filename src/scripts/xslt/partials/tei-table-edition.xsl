@@ -4,8 +4,7 @@
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>
-            <h1>Widget tei-table.</h1>
-            <p>Contact person: daniel.stoxreiter@oeaw.ac.at</p>
+            <h1>Copy of tei-table needed for tables in editions.</h1>
             <p>Applied with apply-templates in html:body.</p>
             <p>The template "tei-table" can handle the tei/xml tag table and cell.</p>
             <p>The template is used to create a html table based on two different rule-sets.</p>
@@ -19,9 +18,9 @@
                 <div class="card">
                     <div class="bg-neutral-100">
                         <xsl:if test="./tei:head">
-                            <h1 class="font-semibold p-4">
+                            <h2 class="font-semibold p-4 mt-0">
                                 <xsl:value-of select="./tei:head[1]"/>
-                            </h1>
+                            </h2>
                             <!--<h4>
                                 <xsl:value-of select="./tei:head[2]"/>
                             </h4>-->

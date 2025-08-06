@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:foo="foo.com" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dc="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:sparql="http://www.w3.org/2005/sparql-results#" xmlns:my="http://test.org/" exclude-result-prefixes="#all" version="2.0">
+<xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:foo="foo.com" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dc="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:sparql="http://www.w3.org/2005/sparql-results#" xmlns:my="http://test.org/" xmlns:map="http://www.w3.org/2005/xpath-functions/map" exclude-result-prefixes="#all" version="3.0">
     <xsl:output encoding="UTF-8" media-type="text/html" method="html" version="5.0" indent="yes"/>
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
@@ -12,9 +12,17 @@
             <p>If a type attribute is found the template verifies if the value is either URI, URL, GND or VIAF.</p>
             <p>If a corresponding value is found the ref value will be used as URL and create a html link.</p>
             <p>If a target attribute is found the ref value will be used as URL and create a html link if the value starts with http or www.</p>
+						<p>Adjusted by Barbara Krautgartner</p>
         </desc>
     </doc>
-
+		<xsl:variable name="table-paths" as="map(*)">
+			 <xsl:map>
+			 		<xsl:map-entry key="'Tabelle_1.xml'" select="'primaerquellen'"/>
+					<xsl:map-entry key="'Tabelle_2.xml'" select="'sekundaerquellen'"/>
+          <xsl:map-entry key="'Tabelle_3.xml'" select="'ausserhalb_wiens'"/>
+					<xsl:map-entry key="'Tabelle_4.xml'" select="'zu_bruckners_lebzeiten'"/>
+      	</xsl:map>
+		</xsl:variable>
     <xsl:template match="tei:ref">
         <xsl:choose>
             <xsl:when test="@type='URI' or @type='URL' or @type='GND' or @type='VIAF'">
@@ -85,10 +93,10 @@
                 <xsl:variable name="tg" select="tokenize(@target, '/')"/>
                 <a>
                     <xsl:attribute name="href">
-                        <xsl:value-of select="replace($tg[last()], '.xml', '.html')"/>
+                        <xsl:value-of select="replace($tg[last()], '^.+$', map:get($table-paths,$tg[last()]))"/>
                     </xsl:attribute>
                     <xsl:attribute name="title">
-                        <xsl:value-of select="replace($tg[last()], '.xml', '.html')"/>
+                        <xsl:value-of select="replace($tg[last()], '^.+$', map:get($table-paths,$tg[last()]))"/>
                     </xsl:attribute>
                     <xsl:apply-templates/>
                 </a>

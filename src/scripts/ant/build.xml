@@ -32,6 +32,10 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
         <classpath location="${basedir}/../saxon/saxon9he.jar"/>
   </xslt>
+	<xslt in="${index}" out="${target}/edition_index.json" style="${basedir}/scripts/xslt/generate-edition-index.xsl">
+			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+			<classpath location="${basedir}/../saxon/saxon9he.jar"/>
+	</xslt>
 	<xslt style="${basedir}/scripts/xslt/editions.xsl"  basedir="${basedir}/data/editions" destdir="${target}" includes="*.xml">
 			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
 			<classpath location="${basedir}/../saxon/saxon9he.jar"/>

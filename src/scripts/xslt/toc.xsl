@@ -41,6 +41,7 @@
                         <xsl:variable name="full_path">
                             <xsl:value-of select="document-uri(/)"/>
                         </xsl:variable>
+												<xsl:variable name="id" select="current()//tei:idno[@type='Bruckner_Kopisten']"/>
                         <xsl:variable name="personN">
                             <xsl:choose>
                                 <xsl:when test=".//tei:persName[@subtype]">
@@ -111,15 +112,15 @@
                                         <xsl:value-of select="
                                                 replace(
                                                 tokenize($full_path, '/')[last()],
-                                                '.xml',
-                                                '.html')"/>
+                                                '^.+$',
+                                                $id)"/>
                                     </xsl:attribute>
                                     <xsl:attribute name="title">
                                         <xsl:value-of select="
                                                 replace(
                                                 tokenize($full_path, '/')[last()],
-                                                '.xml',
-                                                '.html')"/>
+                                                '^.+$',
+                                                $id)"/>
                                     </xsl:attribute>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-box-arrow-in-right"
