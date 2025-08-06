@@ -1,0 +1,38 @@
+---
+import { readFile } from "node:fs/promises";
+
+import { DataTable } from "@/components/data-table";
+import { defaultLocale, type Locale } from "@/config/i18n.config";
+import KopistenDetailLayout from "@/layouts/kopisten-detail-layout.astro";
+import PageLayout from "@/layouts/page-layout.astro";
+import { createI18n } from "@/lib/i18n";
+
+const locale = (Astro.currentLocale ?? defaultLocale) as Locale;
+const { t } = await createI18n(Astro.currentLocale as Locale | undefined);
+const labels = t("KopistenTable.labels");
+
+export async function getStaticPaths() {
+	const editionIndexContent = await readFile("src/edition/edition_index.json", "utf-8");
+	const editionIndex = JSON.parse(editionIndexContent);
+	return editionIndex.map((entry: { id: string; title: string; filename: string }) => {
+		const { id, filename, title } = entry;
+		return {
+			params: { id },
+			props: {
+				html: readFile(`src/edition/${filename}.html`, "utf-8"),
+				title,
+			},
+		};
+	});
+}
+
+const { html, title } = Astro.props;
+---
+
+<PageLayout locale={locale} title={title}>
+	<KopistenDetailLayout title={""}>
+		<DataTable labels={labels} client:only="solid">
+			<Fragment set:html={html} />
+		</DataTable>
+	</KopistenDetailLayout>
+</PageLayout>

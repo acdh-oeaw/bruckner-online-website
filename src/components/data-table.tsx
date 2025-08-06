@@ -62,7 +62,7 @@ export function DataTable(props: DataTableProps) {
 											<label htmlFor="search-input">${String(props.labels.search)}</label>
 												<input class="datatable-input rounded-sm border px-3 py-1"  type='search'>
 										</div>
-										<div class="datatable-info"></div>
+										<div class="datatable-info text-center"></div>
 									</div>
 									<div class="datatable-container"></div>
 									<div class="flex justify-end mb-2">

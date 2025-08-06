@@ -19,7 +19,18 @@ const config: Config = {
 		"./src/styles/**/*.css",
 	],
 	presets: [preset],
-	safelist: ["mb-0"],
+	safelist: [
+		"mb-0",
+		"md:grid-cols-[1.5fr_3fr]",
+		"mt-0",
+		"my-0",
+		"w-[100px]",
+		"h-[100px]",
+		"h-fit",
+		"md:w-32",
+		"bg-neutral-100",
+		"px-2",
+	],
 	theme: {
 		extend: {
 			colors: {
