@@ -64,12 +64,13 @@
 
     <xsl:template match="tei:item">
         <xsl:variable name="url" select="tokenize(./tei:ref/@target, '/')[last()]"/>
+				<xsl:variable name="refId" select="replace(./tei:ref/@corresp,'content-','')"/>
         <tr>
             <td>
                 <xsl:value-of select="."/>
             </td>
             <td>
-                <a href="{replace($url, '.xml', '.html')}" title="{./tei:ref/tei:persName}">
+                <a href="{replace($url, '^.+$', $refId)}" title="{./tei:ref/tei:persName}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                         fill="currentColor" class="bi bi-box-arrow-in-right inline" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
