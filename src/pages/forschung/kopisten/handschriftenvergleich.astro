@@ -16,8 +16,16 @@ const { t } = await createI18n((Astro.currentLocale ?? defaultLocale) as Locale)
 const kopist_1 = Astro.url.searchParams.get("kopist_1") || "";
 const kopist_2 = Astro.url.searchParams.get("kopist_2") || "";
 
-const html_kopist_1 = readFileSync(`src/edition/facs/${kopist_1}.html`, "utf-8");
-const html_kopist_2 = readFileSync(`src/edition/facs/${kopist_2}.html`, "utf-8");
+let html_kopist_1;
+let html_kopist_2;
+
+if (kopist_1) {
+	html_kopist_1 = readFileSync(`src/edition/facs/${kopist_1}.html`, "utf-8");
+}
+
+if (kopist_2) {
+	html_kopist_2 = readFileSync(`src/edition/facs/${kopist_2}.html`, "utf-8");
+}
 ---
 
 <PageLayout locale={locale} title={t("KopistenMeta.title")}>

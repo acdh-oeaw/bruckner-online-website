@@ -21,10 +21,12 @@ const config: Config = {
 	presets: [preset],
 	safelist: [
 		"gap-4",
+		"max-w-full",
 		"mb-0",
 		"md:grid-cols-[1.5fr_3fr]",
 		"mt-0",
 		"my-0",
+		"overflow-x-scroll",
 		"w-[100px]",
 		"h-[100px]",
 		"h-fit",

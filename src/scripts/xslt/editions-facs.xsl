@@ -38,7 +38,7 @@
 		<xsl:template match="tei:item">
 			<figure>
 				<xsl:apply-templates select="tei:title"/>
-				<div class="inline-flex items-start gap-x-2">
+				<div class="inline-flex items-start gap-x-2 max-w-full overflow-x-scroll">
 					<xsl:apply-templates select="tei:figure/tei:graphic"/>
 				</div>
 			</figure>
