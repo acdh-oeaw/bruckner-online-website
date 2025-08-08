@@ -76,6 +76,9 @@ COPY --chown=node:node ./content/pages/lexikon ./content/pages/lexikon
 COPY --chown=node:node ./content/pages/kontakt.mdx ./content/pages/kontakt.mdx
 COPY --chown=node:node ./content/pages/werkverzeichnis/wab.mdx ./content/pages/werkverzeichnis/wab.mdx
 
+# these html snippets need to be available at runtime. TODO: different folder structure
+COPY --chown=node:node ./src/edition/facs ./src/edition/facs
+
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=3000
