@@ -15,5 +15,7 @@
 				"unifiedjs.vscode-mdx"
 			]
 		}
-	}
+	},
+	"postCreateCommand": "./.devcontainer/postCreateSetup.sh",
+	"remoteUser": "root"
 }
