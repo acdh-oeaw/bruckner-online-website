@@ -8,9 +8,11 @@ interface Props {
 	title: string;
 	image?: string | null;
 	languageToggle?: boolean;
+	bg?: boolean;
+	shadow?: boolean;
 }
 
-const { languageToggle = false } = Astro.props;
+const { bg = true, shadow = true, languageToggle = false } = Astro.props;
 ---
 
 <MainContent>
@@ -23,7 +25,9 @@ const { languageToggle = false } = Astro.props;
 	</div>
 	<PageSection>
 		{languageToggle && <KopistenLanguageToggle languages={["de", "en"]} client:only="solid" />}
-		<div class="prose my-2 bg-white shadow-lg shadow-neutral-500">
+		<div
+			class:list={["prose my-2", { "bg-white": bg }, { "shadow-lg shadow-neutral-500": shadow }]}
+		>
 			<slot />
 		</div>
 	</PageSection>

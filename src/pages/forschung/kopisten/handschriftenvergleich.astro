@@ -1,0 +1,58 @@
+---
+import { readFileSync } from "fs";
+
+import CopyistSelect from "@/components/form/copyist-select";
+import { defaultLocale, type Locale } from "@/config/i18n.config";
+import KopistenLayout from "@/layouts/kopisten-layout.astro";
+import PageLayout from "@/layouts/page-layout.astro";
+import { createI18n } from "@/lib/i18n";
+
+export const prerender = false;
+
+const locale = (Astro.currentLocale ?? defaultLocale) as Locale;
+
+const { t } = await createI18n((Astro.currentLocale ?? defaultLocale) as Locale);
+
+const kopist_1 = Astro.url.searchParams.get("kopist_1") || "";
+const kopist_2 = Astro.url.searchParams.get("kopist_2") || "";
+
+const html_kopist_1 = readFileSync(`src/edition/facs/${kopist_1}.html`, "utf-8");
+const html_kopist_2 = readFileSync(`src/edition/facs/${kopist_2}.html`, "utf-8");
+---
+
+<PageLayout locale={locale} title={t("KopistenMeta.title")}>
+	<KopistenLayout title={""} bg={false} shadow={false} languageToggle={true}>
+		<form>
+			<div class="flex flex-col gap-4 md:flex-row">
+				<div class="flex-1 bg-white shadow-lg shadow-neutral-500">
+					<div class="bg-neutral-100 p-2">
+						<CopyistSelect name="kopist_1" selectedValue={kopist_1} client:load />
+					</div>
+					<div class="p-4">
+						{
+							!kopist_1 ? (
+								<p>Kopist auswählen und vergleichen</p>
+							) : (
+								<Fragment set:html={html_kopist_1} />
+							)
+						}
+					</div>
+				</div>
+				<div class="flex-1 bg-white shadow-lg shadow-neutral-500">
+					<div class="bg-neutral-100 p-2">
+						<CopyistSelect name="kopist_2" selectedValue={kopist_2} client:load />
+					</div>
+					<div class="p-4">
+						{
+							!kopist_2 ? (
+								<p>Kopist auswählen und vergleichen</p>
+							) : (
+								<Fragment set:html={html_kopist_2} />
+							)
+						}
+					</div>
+				</div>
+			</div>
+		</form>
+	</KopistenLayout>
+</PageLayout>

@@ -20,6 +20,7 @@ const config: Config = {
 	],
 	presets: [preset],
 	safelist: [
+		"gap-4",
 		"mb-0",
 		"md:grid-cols-[1.5fr_3fr]",
 		"mt-0",

@@ -14,10 +14,10 @@ export function KopistenLanguageToggle(props: KopistenLanguageToggleProps) {
 	const handler = (language: string) => {
 		return () => {
 			setLanguage(language);
-			document.querySelectorAll(`div[lang="${language}"]`).forEach((el) => {
+			document.querySelectorAll(`body *[lang="${language}"]`).forEach((el) => {
 				el.classList.remove("hidden");
 			});
-			document.querySelectorAll(`div[lang]:not([lang="${language}"])`).forEach((el) => {
+			document.querySelectorAll(`body *[lang]:not([lang="${language}"])`).forEach((el) => {
 				el.classList.add("hidden");
 			});
 		};
