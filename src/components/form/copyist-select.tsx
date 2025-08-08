@@ -8,13 +8,14 @@ interface CopyistSelectProps {
 }
 
 export default function CopyistSelect(props: CopyistSelectProps) {
-	const { name, selectedValue } = props;
 	return (
 		<select
 			data-kopisten-select
-			name={name}
+			name={props.name}
 			class="w-full rounded-md bg-white p-2.5"
-			onChange={(e) => {return (e.currentTarget as HTMLSelectElement).form?.submit()}}
+			onChange={(e) => {
+				return (e.currentTarget as HTMLSelectElement).form?.submit();
+			}}
 		>
 			<option disabled selected hidden>
 				Kopist auswählen
@@ -23,7 +24,7 @@ export default function CopyistSelect(props: CopyistSelectProps) {
 				{(editionItem) => {
 					const { id, copyist_name: copyistName } = editionItem;
 					return (
-						<option value={id} selected={selectedValue === id}>
+						<option value={id} selected={props.selectedValue === id}>
 							{copyistName}
 						</option>
 					);
