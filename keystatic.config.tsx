@@ -1,6 +1,5 @@
 import { collection, config, fields, singleton } from "@keystatic/core";
 
-import { Logo } from "@/components/logo";
 import { createAssetPaths, createPreviewUrl } from "@/config/content.config";
 import { env } from "@/config/env.config";
 import { createComponents } from "@/lib/content/create-components";
@@ -9,8 +8,7 @@ export default config({
 	ui: {
 		brand: {
 			name: "Bruckner Online",
-			// @ts-expect-error `ReactNode` is a valid return type.
-			mark: Logo,
+			//mark: Logo,
 		},
 		navigation: {
 			Pages: ["indexPage", "pages"],
