@@ -1,6 +1,7 @@
 # bruckner online website
 
-website for the "bruckner online" project.
+**NOTE:** This repository is archived as development continues in a dedicated github organization: https://github.com/bruckner-online.
+
 
 ## how to run
 
